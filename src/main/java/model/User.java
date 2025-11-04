@@ -1,28 +1,36 @@
-package dao;
+package model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class User {
     @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(nullable = false)
+
+    @Column(unique = true, nullable = false)
     private String name;
-    @Column(nullable = false)
+
+    @Column(unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
+
+    @Column(unique = true, nullable = false)
     private String phone;
-    @Column(nullable = false)
+
+    @Column(unique = true, nullable = false)
     private String password;
-    @Column(nullable = false)
+
+    @Column
     private String role;
-    @Column(nullable = false)
+
+    @Column
     private String city;
-    @Column(nullable = false)
+
+    @Column
     private boolean verified;
 
+    // constructor:
+    public  User() {};
     public User(String name, String email, String password, String role, String city, boolean verified, String phone) {
         this.name = name;
         this.email = email;
@@ -80,4 +88,7 @@ public class User {
     public boolean isVerified() {
         return verified;
     }
+
+    // DB interactions:
+    
 }
