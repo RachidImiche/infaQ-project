@@ -2,32 +2,39 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class User {
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(unique = true, nullable = false)
     private String name;
-
     @Column(unique = true, nullable = false)
     private String email;
-
-    @Column(unique = true, nullable = false)
+    @Column
     private String phone;
-
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
-
     @Column
     private String role;
-
     @Column
     private String city;
-
     @Column
     private boolean verified;
+
+    /** relation:
+     * one user to many posts
+     * one user to many donnations
+     */
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts = new ArrayList<>();
+    @OneToMany(mappedBy = "donater")
+    private List<Donation> givenDon = new ArrayList<>();
+    @OneToMany(mappedBy = "receiver")
+    private List<Donation> receivedDon  = new ArrayList<>();
 
     // constructor:
     public  User() {};
@@ -40,9 +47,6 @@ public class User {
     }
 
     // setters:
-    public void setId(long id) {
-        this.id = id;
-    }
     public void setName(String name) {
         this.name = name;
     }
@@ -63,6 +67,16 @@ public class User {
     }
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+    public void setGivenDon(List<Donation> givenDon) {
+        this.givenDon = givenDon;
+    }
+    public void setReceivedDon(List<Donation> receivedDon) {
+        this.receivedDon = receivedDon;
     }
 
     //getters:
@@ -89,6 +103,15 @@ public class User {
         return verified;
     }
 
+    public List<Donation> getGivenDon() {
+        return givenDon;
+    }
+    public List<Donation> getReceivedDon() {
+        return receivedDon;
+    }
+    public List<Post> getPosts() {
+        return posts;
+    }
     // DB interactions:
     
 }
