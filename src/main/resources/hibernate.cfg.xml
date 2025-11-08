@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/infaq?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Raachid6789@@@@</property>
+
+        <!-- JDBC connection pool settings -->
+        <property name="hibernate.connection.pool_size">10</property>
+
+        <!-- SQL dialect -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+        <!-- Print all executed SQL  -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Drop and re-create the database schema on startup -->
+
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Disable the second-level cache -->
+        <property name="hibernate.cache.use_second_level_cache">false</property>
+
+        <!-- Current session context -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!-- Enable Lazy Loading -->
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+
+        <!-- Mapping classes -->
+        <mapping class="com.donations.model.User"/>
+        <mapping class="com.donations.model.Post"/>
+        <mapping class="com.donations.model.Like"/>
+        <mapping class="com.donations.model.Donation"/>
+        <mapping class="com.donations.model.Comment"/>
+    </session-factory>
+</hibernate-configuration>
