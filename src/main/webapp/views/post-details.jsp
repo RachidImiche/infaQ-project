@@ -67,6 +67,28 @@
             padding: 0 20px;
         }
 
+        .copy-link-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .copy-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-link-btn:active {
+            transform: translateY(0);
+        }
+
         .post-card {
             background: white;
             border-radius: 10px;
@@ -467,6 +489,7 @@
     }
 
     boolean hasLiked = (Boolean) request.getAttribute("hasLiked");
+    boolean hasSaved = (Boolean) request.getAttribute("hasSaved");
     List<Donation> donations = (List<Donation>) request.getAttribute("donations");
     List<Comment> comments = (List<Comment>) request.getAttribute("comments");
 
@@ -502,10 +525,21 @@
                     <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
                         <%= post.getAuthor().getUsername() %>
                     </div>
+                    <% if (post.getAuthor().getFullName() != null && !post.getAuthor().getFullName().isEmpty()) { %>
+                        <div style="font-size: 12px; color: #999;"><%= post.getAuthor().getFullName() %></div>
+                    <% } %>
                     <div class="post-date"><%= post.getCreatedAt().format(formatter) %></div>
                 </div>
             </a>
-            <div class="post-category-badge"><%= post.getCategory() %></div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="post-category-badge"><%= post.getCategory() %></div>
+                <button onclick="copyPostLink()"
+                        style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px;"
+                        title="Copy link to post">
+                    🔗
+                </button>
+            </div>
+
         </div>
 
         <%
@@ -540,6 +574,7 @@
             <span>❤️ <%= post.getLikesCount() %> likes</span>
             <span>💬 <%= post.getCommentsCount() %> comments</span>
             <span>🎁 <%= post.getDonationsCount() %> donations</span>
+            <span>👁️ <%= post.getViewCount() %> views</span>
         </div>
 
         <div class="post-actions">
@@ -552,6 +587,24 @@
                     <%= hasLiked ? "❤️" : "🤍" %> <%= hasLiked ? "Liked" : "Like" %>
                 </button>
             </form>
+
+            <form method="POST"
+                  action="<%= request.getContextPath() %>/posts/save"
+                  class="action-btn-form">
+                <input type="hidden" name="postId" value="<%= post.getId() %>">
+                <input type="hidden" name="action" value="<%= hasSaved ? "unsave" : "save" %>">
+                <button type="submit" class="action-btn <%= hasSaved ? "saved" : "" %>">
+                    <%= hasSaved ? "🔖 Saved" : "📌 Save" %>
+                </button>
+            </form>
+        </div>
+        <div style="padding: 15px 20px; border-top: 1px solid #e0e0e0;">
+            <button onclick="copyPostLink()" class="copy-link-btn">
+                🔗 Copy Link to Post
+            </button>
+            <span id="copySuccess" style="display: none; color: #4CAF50; margin-left: 10px; font-weight: 600;">
+        ✓ Link copied!
+    </span>
         </div>
 
         <%
@@ -714,5 +767,36 @@
         %>
     </div>
 </div>
+<script>
+    function copyPostLink() {
+        const postId = <%= post.getId() %>;
+        const baseUrl = '<%= request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() %>';
+        const postUrl = baseUrl + '/posts/details?id=' + postId;
+
+        //using Clipboard API
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(postUrl).then(function () {
+                showCopySuccess();
+            }).catch(function (err) {
+                alert('Failed to copy link: ' + err);
+            });
+        }
+    }
+
+
+
+    function showCopySuccess() {
+        const successMsg = document.getElementById('copySuccess');
+        const btn = document.querySelector('.copy-link-btn');
+
+        successMsg.style.display = 'inline';
+        btn.textContent = '✓ Copied!';
+
+        setTimeout(function() {
+            successMsg.style.display = 'none';
+            btn.textContent = '🔗 Copy Link to Post';
+        }, 3000);
+    }
+</script>
 </body>
 </html>

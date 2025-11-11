@@ -97,6 +97,15 @@
             font-weight: bold;
             font-size: 48px;
             flex-shrink: 0;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .profile-details {
@@ -339,6 +348,32 @@
             font-size: 4em;
             margin-bottom: 15px;
         }
+
+        .profile-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-edit-profile {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-edit-profile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -379,7 +414,12 @@
 
         <div class="profile-info">
             <div class="profile-avatar">
-                <%= profileUser.getUsername().substring(0, 1).toUpperCase() %>
+                <% if (profileUser.getProfileImage() != null && !profileUser.getProfileImage().isEmpty()) { %>
+                    <img src="<%= request.getContextPath() %>/<%= profileUser.getProfileImage() %>"
+                         alt="<%= profileUser.getUsername() %>">
+                <% } else { %>
+                    <%= profileUser.getUsername().substring(0, 1).toUpperCase() %>
+                <% } %>
             </div>
             <div class="profile-details">
                 <div class="profile-username">
@@ -440,6 +480,19 @@
                 }
             %>
         </div>
+
+        <!-- Edit Profile Button (Only for own profile) -->
+        <%
+            if (isOwnProfile) {
+        %>
+        <div class="profile-actions">
+            <a href="<%= request.getContextPath() %>/profile/edit" class="btn-edit-profile">
+                ✏️ Edit Profile
+            </a>
+        </div>
+        <%
+            }
+        %>
     </div>
 
     <!-- Tabs -->
@@ -506,6 +559,7 @@
                             <span>❤️ <%= post.getLikesCount() %></span>
                             <span>💬 <%= post.getCommentsCount() %></span>
                             <span>🎁 <%= post.getDonationsCount() %></span>
+                            <span>👁️ <%= post.getViewCount() %></span>
                         </div>
                     </div>
                 </div>

@@ -38,5 +38,6 @@
         <mapping class="com.donations.model.Like"/>
         <mapping class="com.donations.model.Donation"/>
         <mapping class="com.donations.model.Comment"/>
+        <mapping class="com.donations.model.SavedPost"/>
     </session-factory>
 </hibernate-configuration>

@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed - DonationsApp</title>
+    <title><%= request.getAttribute("pageTitle") %> - DonationsApp</title>
     <style>
         * {
             margin: 0;
@@ -50,6 +50,17 @@
             color: #333;
             font-size: 1.5em;
             font-weight: bold;
+        }
+        .post-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .post-title:hover {
+            color: #667eea;
+            transition: color 0.3s;
         }
 
         .navbar-search {
@@ -338,6 +349,26 @@
             border-radius: 5px;
             transition: background 0.3s;
         }
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eee;
+            font-weight: bold;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
 
         .action-btn:hover {
             background: #f0f2f5;
@@ -393,6 +424,8 @@
 
     List<Post> posts = (List<Post>) request.getAttribute("posts");
     Map<Long, Boolean> likedPosts = (Map<Long, Boolean>) request.getAttribute("likedPosts");
+    Map<Long, Boolean> savedPosts = (Map<Long, Boolean>) request.getAttribute("savedPosts");
+
     String selectedCategory = (String) request.getAttribute("selectedCategory");
     String searchQuery = (String) request.getAttribute("searchQuery");
 
@@ -417,18 +450,45 @@
 
 
         <div class="navbar-menu">
+            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
+                🏠 Home
+            </a>
+            <a href="<%= request.getContextPath() %>/trending" class="nav-link">
+                🔥 Trending
+            </a>
+            <a href="<%= request.getContextPath() %>/saved" class="nav-link">
+                🔖 Saved
+            </a>
             <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
                 ➕ Create Post
             </a>
             <div class="user-profile">
-                <div class="user-avatar">
+                <div class="profile-avatar">
+                    <%
+
+
+                            if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= currentUser.getProfileImage() %>"
+                         alt="<%= currentUser.getUsername() %>"
+                         data-initial="<%= currentUser.getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
                     <%= currentUser.getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+
+                        }
+                    %>
                 </div>
-                <a href="<%= request.getContextPath() %>/profile" class="nav-link">
-                    👤 Profile
-                </a>
-                <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
+
+                <div class="profile-links">
+                    <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
+                    <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
+                </div>
             </div>
+
         </div>
     </div>
 </nav>
@@ -489,20 +549,40 @@
             }
 
             boolean isLiked = likedPosts.get(post.getId()) != null && likedPosts.get(post.getId());
+            boolean isSaved = savedPosts.get(post.getId()) != null && savedPosts.get(post.getId());
     %>
     <div class="post-card">
         <!-- Post Header -->
-        <div class="post-header">
-            <div class="post-author-avatar">
+        <div class="user-profile">
+            <div class="profile-avatar">
+                <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>" style="text-decoration: none; color: inherit; display: flex; width:100%; height:100%; align-items:center; justify-content:center;">
+                <%
+                    String authorProfileImage = post.getAuthor().getProfileImage();
+                    if (authorProfileImage != null && !authorProfileImage.isEmpty()) {
+                %>
+                <img src="<%= request.getContextPath() %>/<%= authorProfileImage %>"
+                     alt="<%= post.getAuthor().getUsername() %>"
+                     data-initial="<%= post.getAuthor().getUsername().substring(0,1).toUpperCase() %>"
+                     onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                <%
+                    } else {
+                %>
                 <%= post.getAuthor().getUsername().substring(0, 1).toUpperCase() %>
-            </div>
-            <div class="post-author-info">
-                <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
-                   style="text-decoration: none;">
-                    <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
-                        <%= post.getAuthor().getUsername() %>
-                    </div>
+                <%
+                    }
+                %>
                 </a>
+            </div>
+             <div class="post-author-info">
+                 <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
+                    style="text-decoration: none;">
+                     <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
+                         <%= post.getAuthor().getUsername() %>
+                     </div>
+                 </a>
+                <% if (post.getAuthor().getFullName() != null && !post.getAuthor().getFullName().isEmpty()) { %>
+                    <div style="font-size: 12px; color: #999;"><%= post.getAuthor().getFullName() %></div>
+                <% } %>
                 <div class="post-date"><%= post.getCreatedAt().format(formatter) %></div>
             </div>
             <div class="post-category-badge"><%= post.getCategory() %></div>
@@ -513,16 +593,21 @@
             if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
         %>
         <img src="<%= request.getContextPath() %>/<%= post.getImageUrl() %>"
-             alt="<%= post.getTitle() %>" class="post-image">
+             alt="<%= post.getTitle() %>"
+             class="post-image"
+             onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"
+             style="cursor: pointer;">
         <%
             }
         %>
 
         <!-- Post Content -->
         <div class="post-content">
+            <div onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"
+                 style="cursor: pointer;">
             <h2 class="post-title"><%= post.getTitle() %></h2>
             <p class="post-description"><%= post.getDescription() %></p>
-
+            </div>
             <div class="post-progress">
                 <div class="progress-row">
                     <span class="progress-label">Raised</span>
@@ -543,6 +628,7 @@
             <span>❤️ <%= post.getLikesCount() %> likes</span>
             <span>💬 <%= post.getCommentsCount() %> comments</span>
             <span>🎁 <%= post.getDonationsCount() %> donations</span>
+            <span>👁️ <%= post.getViewCount() %> views</span>
         </div>
 
         <!-- Post Actions -->
@@ -566,6 +652,16 @@
                class="action-btn">
                 🎁 Donate
             </a>
+
+            <form method="POST"
+                  action="<%= request.getContextPath() %>/posts/save"
+                  class="action-btn-form">
+                <input type="hidden" name="postId" value="<%= post.getId() %>">
+                <input type="hidden" name="action" value="<%= isSaved ? "unsave" : "save" %>">
+                <button type="submit" class="action-btn <%= isSaved ? "saved" : "" %>">
+                    <%= isSaved ? "🔖 Saved" : "📌 Save" %>
+                </button>
+            </form>
         </div>
 
         <%

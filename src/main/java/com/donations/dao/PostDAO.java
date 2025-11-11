@@ -62,6 +62,25 @@ public class PostDAO {
             return null;
         }
     }
+    public void incrementViewCount(Long postId) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+
+            // Using HQL to increment view count
+            Query query = session.createQuery(
+                    "UPDATE Post SET viewCount = viewCount + 1 WHERE id = :postId");
+            query.setParameter("postId", postId);
+            query.executeUpdate();
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
 
     public List<Post> getAllPosts() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -105,6 +124,19 @@ public class PostDAO {
                     Post.class);
             query.setParameter("keyword", "%" + keyword.toLowerCase() + "%");
             return query.list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public List<Post> getMostViewedPosts(int limit) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Post> query = session.createQuery(
+                    "FROM Post p ORDER BY p.viewCount DESC", Post.class);
+            query.setMaxResults(limit);
+            List<Post> posts = query.list();
+            System.out.println("Fetched trending posts: " + posts.size());
+            return posts;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

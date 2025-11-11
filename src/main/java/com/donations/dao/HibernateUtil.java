@@ -1,6 +1,7 @@
 package com.donations.dao;
 
 import com.donations.model.Post;
+import com.donations.model.SavedPost;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -20,6 +21,7 @@ public class HibernateUtil {
             // Create MetadataSources and EXPLICITLY add the entity
             MetadataSources sources = new MetadataSources(registry);
             sources.addAnnotatedClass(Post.class);
+            sources.addAnnotatedClass(SavedPost.class);
 
             // Build SessionFactory
             return sources.buildMetadata().buildSessionFactory();

@@ -32,6 +32,9 @@ public class Post {
     @Column(name = "image_url")
     private String imageUrl;
 
+    @Column(name = "view_count", nullable = false)
+    private Long viewCount = 0L;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -51,10 +54,16 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<SavedPost> savedPosts = new HashSet<>();
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
+        if (viewCount == null) {
+            viewCount = 0L;
+        }
     }
 
     @PreUpdate
@@ -65,6 +74,7 @@ public class Post {
     // Constructors
     public Post() {
         this.collectedAmount = BigDecimal.ZERO;
+        this.viewCount = 0L;
     }
 
     public Post(String title, String description, BigDecimal goalAmount, String category, User author) {
@@ -74,6 +84,7 @@ public class Post {
         this.collectedAmount = BigDecimal.ZERO;
         this.category = category;
         this.author = author;
+        this.viewCount = 0L;
     }
 
     // Getters and Setters
@@ -133,6 +144,14 @@ public class Post {
         this.imageUrl = imageUrl;
     }
 
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
@@ -179,6 +198,14 @@ public class Post {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<SavedPost> getSavedPosts() {
+        return savedPosts;
+    }
+
+    public void setSavedPosts(Set<SavedPost> savedPosts) {
+        this.savedPosts = savedPosts;
     }
 
     public int getLikesCount() {

@@ -46,6 +46,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Comment> comments = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<SavedPost> savedPosts = new HashSet<>();
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -156,5 +159,13 @@ public class User {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Set<SavedPost> getSavedPosts() {
+        return savedPosts;
+    }
+
+    public void setSavedPosts(Set<SavedPost> savedPosts) {
+        this.savedPosts = savedPosts;
     }
 }

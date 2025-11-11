@@ -17,9 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/feed")
-public class PostFeedServlet extends HttpServlet {
-
+@WebServlet("/trending")
+public class TrendingPostsServlet extends HttpServlet {
     private PostDAO postDAO;
     private LikeDAO likeDAO;
     private SavedPostDAO savedPostDAO;
@@ -67,13 +66,16 @@ public class PostFeedServlet extends HttpServlet {
             }
         }
 
-        request.setAttribute("posts", posts);
+        // Get top 10 most viewed posts
+        List<Post> trendingPosts = postDAO.getMostViewedPosts(2);
+        request.setAttribute("posts", trendingPosts);
+        request.setAttribute("selectedCategory", category);
         request.setAttribute("likedPosts", likedPosts);
         request.setAttribute("savedPosts", savedPosts);
-        request.setAttribute("selectedCategory", category);
-        request.setAttribute("pageTitle", "Feed");
         request.setAttribute("searchQuery", search);
 
-        request.getRequestDispatcher("/views/feed.jsp").forward(request, response);
+
+
+        request.getRequestDispatcher("/views/trending.jsp").forward(request, response);
     }
 }

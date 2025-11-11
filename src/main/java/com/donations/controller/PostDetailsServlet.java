@@ -4,6 +4,7 @@ import com.donations.dao.CommentDAO;
 import com.donations.dao.DonationDAO;
 import com.donations.dao.LikeDAO;
 import com.donations.dao.PostDAO;
+import com.donations.dao.SavedPostDAO;
 import com.donations.model.Comment;
 import com.donations.model.Donation;
 import com.donations.model.Post;
@@ -25,6 +26,7 @@ public class PostDetailsServlet extends HttpServlet {
     private LikeDAO likeDAO;
     private DonationDAO donationDAO;
     private CommentDAO commentDAO;
+    private SavedPostDAO savedPostDAO;
 
     @Override
     public void init() {
@@ -32,6 +34,7 @@ public class PostDetailsServlet extends HttpServlet {
         likeDAO = new LikeDAO();
         donationDAO = new DonationDAO();
         commentDAO = new CommentDAO();
+        savedPostDAO = new SavedPostDAO();
     }
 
     @Override
@@ -53,6 +56,9 @@ public class PostDetailsServlet extends HttpServlet {
         }
 
         Long postId = Long.parseLong(idParam);
+    // Increment view count when entering this page
+        postDAO.incrementViewCount(postId);
+
         Post post = postDAO.getPostById(postId);
 
         if (post == null) {
@@ -62,11 +68,13 @@ public class PostDetailsServlet extends HttpServlet {
 
         // Get additional data
         boolean hasLiked = likeDAO.hasUserLikedPost(currentUser.getId(), postId);
+        boolean hasSaved = savedPostDAO.hasUserSavedPost(currentUser.getId(), postId);
         List<Donation> donations = donationDAO.getDonationsByPost(postId);
         List<Comment> comments = commentDAO.getCommentsByPost(postId);
 
         request.setAttribute("post", post);
         request.setAttribute("hasLiked", hasLiked);
+        request.setAttribute("hasSaved", hasSaved);
         request.setAttribute("donations", donations);
         request.setAttribute("comments", comments);
 
