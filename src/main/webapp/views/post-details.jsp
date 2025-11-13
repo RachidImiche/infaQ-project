@@ -101,7 +101,7 @@
             color: #555 !important;
         }
 
-        .post-author-avatar:hover,
+
         .donation-avatar:hover,
         .comment-avatar:hover {
             transform: scale(1.05);
@@ -119,7 +119,22 @@
             color: white;
             font-weight: bold;
             font-size: 20px;
+            overflow: hidden;
         }
+
+        .post-author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .post-author-avatar:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+
 
         .post-author-info {
             flex: 1;
@@ -384,7 +399,17 @@
             color: white;
             font-weight: bold;
             flex-shrink: 0;
+            overflow: hidden; /* ensures image stays inside circle */
         }
+
+        .comment-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* makes image fit properly */
+            border-radius: 50%;
+            display: block;
+        }
+
 
         .comment-content {
             flex: 1;
@@ -434,7 +459,17 @@
             font-weight: bold;
             font-size: 18px;
             flex-shrink: 0;
+            overflow: hidden;
         }
+
+        .donation-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
 
         .donation-info {
             flex: 1;
@@ -510,8 +545,22 @@
             <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
                style="text-decoration: none; display: flex; align-items: center; gap: 15px; flex: 1;">
                 <div class="post-author-avatar">
+                    <%
+                        if (post.getAuthor().getProfileImage() != null && !post.getAuthor().getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= post.getAuthor().getProfileImage() %>"
+                         alt="<%= post.getAuthor().getUsername() %>"
+                         data-initial="<%= post.getAuthor().getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
                     <%= post.getAuthor().getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        }
+                    %>
                 </div>
+
                 <div class="post-author-info">
                     <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
                         <%= post.getAuthor().getUsername() %>
@@ -661,9 +710,27 @@
             <a href="<%= request.getContextPath() %>/profile?username=<%= donation.getUser().getUsername() %>"
                style="text-decoration: none;">
                 <div class="donation-avatar" style="cursor: pointer;">
-                    <%= donation.isAnonymous() ? "?" : donation.getUser().getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        if (donation.isAnonymous()) {
+                    %>
+                    ?
+                    <%
+                    } else if (donation.getUser().getProfileImage() != null && !donation.getUser().getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= donation.getUser().getProfileImage() %>"
+                         alt="<%= donation.getUser().getUsername() %>"
+                         data-initial="<%= donation.getUser().getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
+                    <%= donation.getUser().getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        }
+                    %>
                 </div>
             </a>
+
             <div class="donation-info">
                 <div class="donation-user">
                     <% if (!donation.isAnonymous()) { %>
@@ -727,9 +794,23 @@
                 <a href="<%= request.getContextPath() %>/profile?username=<%= comment.getUser().getUsername() %>"
                    style="text-decoration: none;">
                     <div class="comment-avatar" style="cursor: pointer;">
+                        <%
+                            if (comment.getUser().getProfileImage() != null && !comment.getUser().getProfileImage().isEmpty()) {
+                        %>
+                        <img src="<%= request.getContextPath() %>/<%= comment.getUser().getProfileImage() %>"
+                             alt="<%= comment.getUser().getUsername() %>"
+                             data-initial="<%= comment.getUser().getUsername().substring(0,1).toUpperCase() %>"
+                             onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                        <%
+                        } else {
+                        %>
                         <%= comment.getUser().getUsername().substring(0, 1).toUpperCase() %>
+                        <%
+                            }
+                        %>
                     </div>
                 </a>
+
                 <div class="comment-content">
                     <div class="comment-author">
                         <a href="<%= request.getContextPath() %>/profile?username=<%= comment.getUser().getUsername() %>"

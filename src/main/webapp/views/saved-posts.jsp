@@ -24,9 +24,10 @@
             min-height: 100vh;
         }
 
+
         /* Navigation Bar */
         .navbar {
-            background: white;
+            background: #ffffff;
             border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
@@ -50,6 +51,8 @@
             font-weight: bold;
         }
 
+
+
         .navbar-menu {
             display: flex;
             align-items: center;
@@ -68,6 +71,20 @@
             background: #f0f0f0;
         }
 
+        .btn-create {
+            background: #333;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        .btn-create:hover {
+            background: #555;
+        }
+
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -75,8 +92,8 @@
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: #666;
             display: flex;
@@ -84,27 +101,21 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-        }
+            font-size: 14px;
+            overflow: hidden; /* Ensures image stays within the circle */
+        }*
+         .user-avatar:hover {
+             transform: scale(1.05);
+             transition: transform 0.3s;
+         }
 
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #eee;
-            font-weight: bold;
-            font-size: 18px;
-            color: #555;
-        }
-
-        .profile-avatar img {
+        .user-avatar img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Makes the image fill and crop properly */
+            border-radius: 50%;
         }
+
 
         /* Main Content */
         .container {
@@ -369,12 +380,12 @@
         }
 
         .action-btn.saved {
-            color: #333;
+            color: #075df3;
         }
 
         .action-btn-form {
-            flex: 1;
-            margin: 0;
+            /*flex: 1;*/
+            /*margin: 0;*/
         }
 
         .empty-state {
@@ -421,7 +432,14 @@
     </style>
 </head>
 <body>
-<!-- Navigation -->
+<%
+    User currentUser = (User) session.getAttribute("user");
+    if (currentUser == null) {
+        response.sendRedirect(request.getContextPath() + "/login");
+        return;
+    }
+%>
+<!-- Navigation Bar -->
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
@@ -429,24 +447,18 @@
         </a>
 
         <div class="navbar-menu">
-            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
-                Feed
+            <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
+                Create Post
             </a>
             <a href="<%= request.getContextPath() %>/trending" class="nav-link">
                 Trending
             </a>
-            <a href="<%= request.getContextPath() %>/saved" class="nav-link" style="background: #f0f0f0;">
-                Saved
-            </a>
-            <a href="<%= request.getContextPath() %>/posts/create" class="nav-link">
-                Create
+            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
+                Home
             </a>
 
             <div class="user-profile">
-                <%
-                    User currentUser = (User) session.getAttribute("user");
-                %>
-                <div class="profile-avatar">
+                <div class="user-avatar">
                     <%
                         if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
                     %>
@@ -462,16 +474,14 @@
                         }
                     %>
                 </div>
-
-                <div class="profile-links">
-                    <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
-                    <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
-                </div>
+                <a href="<%= request.getContextPath() %>/profile" class="nav-link">
+                    Profile
+                </a>
+                <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
             </div>
         </div>
     </div>
 </nav>
-
 <!-- Main Content -->
 <div class="container">
     <div class="page-header">
@@ -566,7 +576,7 @@
                 </h2>
 
                 <% if (post.getDescription() != null && !post.getDescription().isEmpty()) { %>
-                <p class="post-description"><%= post.getDescription() %></p>
+                <p class="post-description" style="cursor: pointer" onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"><%= post.getDescription() %></p>
                 <% } %>
 
                 <div class="post-progress">

@@ -121,6 +121,7 @@
             background: #555;
         }
 
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -138,7 +139,20 @@
             color: white;
             font-weight: bold;
             font-size: 14px;
+            overflow: hidden; /* Ensures image stays within the circle */
+        }*
+                 .user-avatar:hover {
+                     transform: scale(1.05);
+                     transition: transform 0.3s;
+                 }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Makes the image fill and crop properly */
+            border-radius: 50%;
         }
+
 
         /* Main Content */
         .container {
@@ -219,7 +233,16 @@
             color: white;
             font-weight: bold;
             font-size: 16px;
+            overflow: hidden;
         }
+
+        .post-author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
 
         .post-author-info {
             flex: 1;
@@ -262,12 +285,14 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
+            cursor: pointer;
         }
 
         .post-description {
             color: #666;
             line-height: 1.6;
             margin-bottom: 20px;
+            cursor: pointer;
         }
 
         .post-progress {
@@ -348,6 +373,7 @@
         .action-btn.liked {
             color: #e74c3c;
         }
+
         .action-btn.saved {
             color: #075df3;
         }
@@ -427,13 +453,26 @@
             <a href="<%= request.getContextPath() %>/trending" class="nav-link">
                 Trending
             </a>
- <a href="<%= request.getContextPath() %>/saved" class="nav-link">
+            <a href="<%= request.getContextPath() %>/saved" class="nav-link">
                 Saved
             </a>
 
             <div class="user-profile">
                 <div class="user-avatar">
+                    <%
+                        if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= currentUser.getProfileImage() %>"
+                         alt="<%= currentUser.getUsername() %>"
+                         data-initial="<%= currentUser.getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
                     <%= currentUser.getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        }
+                    %>
                 </div>
                 <a href="<%= request.getContextPath() %>/profile" class="nav-link">
                     Profile
@@ -506,20 +545,38 @@
     <div class="post-card">
         <!-- Post Header -->
         <div class="post-header">
-            <div class="post-author-avatar">
-                <%= post.getAuthor().getUsername().substring(0, 1).toUpperCase() %>
-            </div>
-            <div class="post-author-info">
-                <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
-                   style="text-decoration: none;">
+            <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
+               style="text-decoration: none; display: flex; align-items: center; gap: 15px; flex: 1;">
+                <div class="post-author-avatar">
+                    <%
+                        if (post.getAuthor().getProfileImage() != null && !post.getAuthor().getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= post.getAuthor().getProfileImage() %>"
+                         alt="<%= post.getAuthor().getUsername() %>"
+                         data-initial="<%= post.getAuthor().getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
+                    <%= post.getAuthor().getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        }
+                    %>
+                </div>
+                <div class="post-author-info">
+
                     <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
                         <%= post.getAuthor().getUsername() %>
                     </div>
-                </a>
-                <div class="post-date"><%= post.getCreatedAt().format(formatter) %></div>
-            </div>
-            <div class="post-category-badge"><%= post.getCategory() %></div>
+
+                    <div class="post-date"><%= post.getCreatedAt().format(formatter) %>
+                    </div>
+                </div>
+            </a>
+            <div class="post-category-badge"><%= post.getCategory() %> </div>
+
         </div>
+
 
         <!-- Post Image -->
         <%
@@ -533,8 +590,10 @@
 
         <!-- Post Content -->
         <div class="post-content">
-            <h2 class="post-title"><%= post.getTitle() %></h2>
-            <p class="post-description"><%= post.getDescription() %></p>
+            <h2 class="post-title" onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"><%= post.getTitle() %>
+            </h2>
+            <p class="post-description" onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"><%= post.getDescription() %>
+            </p>
 
             <div class="post-progress">
                 <div class="progress-row">
@@ -556,6 +615,7 @@
             <span><%= post.getLikesCount() %> likes</span>
             <span><%= post.getCommentsCount() %> comments</span>
             <span><%= post.getDonationsCount() %> donations</span>
+            <span><%= post.getViewCount() %> views</span>
         </div>
 
         <!-- Post Actions -->
@@ -604,7 +664,8 @@
                   onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');"
                   style="flex: 1; margin: 0;">
                 <input type="hidden" name="id" value="<%= post.getId() %>">
-                <button type="submit" style="width: 100%; padding: 10px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: normal;">
+                <button type="submit"
+                        style="width: 100%; padding: 10px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: normal;">
                     Delete Post
                 </button>
             </form>

@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DonationsApp - Share, Support, Make a Difference</title>
+    <title>infaQ - Share, Support, Make a Difference</title>
     <style>
         * {
             margin: 0;
@@ -20,75 +20,191 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .hero-container {
-            text-align: center;
-            max-width: 900px;
-        }
-
-        .hero-content {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 60px 50px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        .logo {
-            font-size: 5em;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        h1 {
-            font-size: 3em;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             color: #333;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 1.4em;
-            color: #666;
-            margin-bottom: 40px;
             line-height: 1.6;
         }
 
+        /* Navigation Bar */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            padding: 8px 14px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-link:hover {
+            background: #f0f0f0;
+        }
+
+        .btn-primary {
+            background: #333;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: normal;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #555;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 80px auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            border: 1px solid #333;
+            color: #333;
+            background: white;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #333;
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            height: 350px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 1.2em;
+        }
+
+
+        .hero-image img {
+            width: 100%;
+            max-width: 800px; /* optional, limits hero width */
+            height: auto;
+            border-radius: 20px; /* rounded corners like hero content */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            object-fit: cover;
+            display: block;
+            margin: 0 auto; /* centers the image */
+        }
+
+
+        /* Features Section */
         .features {
+            background: white;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 80px 20px;
+        }
+
+        .features-grid {
+            max-width: 1000px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
         }
 
         .feature {
-            padding: 20px;
+            text-align: center;
         }
 
         .feature-icon {
-            font-size: 3em;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        .feature-icon img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-icon img:hover {
+            transform: scale(1.1);
+        }
+
+
         .feature-title {
+            font-weight: bold;
             font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
             margin-bottom: 8px;
         }
 
@@ -97,129 +213,121 @@
             font-size: 0.95em;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 16px 40px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-        }
-
-        .btn-secondary:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
-        }
-
+        /* Stats Section */
         .stats {
+            max-width: 1000px;
+            margin: 80px auto;
             display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid #e0e0e0;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+            gap: 40px;
         }
 
-        .stat-item {
-            text-align: center;
+        .stat {
+            flex: 1;
+            min-width: 200px;
         }
 
         .stat-number {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: bold;
-            color: #667eea;
-            margin-bottom: 5px;
+            color: #333;
         }
 
         .stat-label {
             color: #666;
             font-size: 1em;
         }
+
+        /* Footer */
+        footer {
+            background: #fff;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
-<div class="hero-container">
-    <div class="hero-content">
-        <div class="logo">🎁</div>
-        <h1>DonationsApp</h1>
-        <p class="tagline">
-            The social platform where generosity meets community.<br>
-            Share causes, support dreams, and make a real difference.
-        </p>
 
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">📸</div>
-                <div class="feature-title">Share Stories</div>
-                <div class="feature-desc">Post with images and tell compelling stories</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">❤️</div>
-                <div class="feature-title">Engage</div>
-                <div class="feature-desc">Like, comment, and show support</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💚</div>
-                <div class="feature-title">Donate</div>
-                <div class="feature-desc">Contribute to causes that matter</div>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🌍</div>
-                <div class="feature-title">Make Impact</div>
-                <div class="feature-desc">Track progress and see results</div>
-            </div>
-        </div>
-
-        <div class="cta-buttons">
-            <a href="<%= request.getContextPath() %>/register" class="btn btn-primary">
-                Get Started - It's Free
-            </a>
-            <a href="<%= request.getContextPath() %>/login" class="btn btn-secondary">
-                Login to Your Account
-            </a>
-        </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Active Campaigns</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">$2M+</div>
-                <div class="stat-label">Funds Raised</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">10K+</div>
-                <div class="stat-label">Supporters</div>
-            </div>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-content">
+        <a href="<%= request.getContextPath() %>/" class="navbar-brand">infaQ</a>
+        <div class="navbar-links">
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#stats" class="nav-link">Impact</a>
+            <a href="<%= request.getContextPath() %>/login" class="nav-link">Login</a>
+            <a href="<%= request.getContextPath() %>/register" class="btn-primary">Get Started</a>
         </div>
     </div>
-</div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>Share. Support. Make a Difference.</h1>
+        <p><b>infaQ</b> connects people who care. Start a cause, give, and see the difference.</p>
+        <div class="hero-buttons">
+            <a href="<%= request.getContextPath() %>/register" class="btn-primary">Create an Account</a>
+            <a href="<%= request.getContextPath() %>/login" class="btn-secondary">Login</a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="images/donating.jpg" alt="Hero Image">
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" id="features">
+    <div class="features-grid">
+        <div class="feature">
+            <div class="feature-icon"><img src="images/image-plus.png"></div>
+            <div class="feature-title">Share Stories</div>
+            <div class="feature-desc">Create posts with images to tell impactful stories that inspire others to give.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><img src="images/heart.png"></div>
+            <div class="feature-title">Engage</div>
+            <div class="feature-desc">Like, comment, and connect with others.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><img src="images/donate.png"></div>
+            <div class="feature-title">Donate</div>
+            <div class="feature-desc">Support verified causes directly and transparently.</div>
+        </div>
+        <div class="feature">
+            <div class="feature-icon"><img src="images/progres.png"></div>
+            <div class="feature-title">See Impact</div>
+            <div class="feature-desc">Track progress and see how your contribution changes lives.</div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats" id="stats">
+    <div class="stat">
+        <div class="stat-number">0+</div>
+        <div class="stat-label">Active Campaigns</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">$0M+</div>
+        <div class="stat-label">Funds Raised</div>
+    </div>
+    <div class="stat">
+        <div class="stat-number">0K+</div>
+        <div class="stat-label">Supporters</div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    © <%= java.time.Year.now() %> infaQ. All rights reserved (Sofyane).
+</footer>
+
 </body>
 </html>

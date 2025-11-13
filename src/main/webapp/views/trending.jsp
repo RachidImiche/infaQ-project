@@ -25,7 +25,7 @@
 
         /* Navigation Bar */
         .navbar {
-            background: white;
+            background: #ffffff;
             border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
@@ -34,9 +34,9 @@
         }
 
         .navbar-content {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 30px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,9 +45,11 @@
         .navbar-brand {
             text-decoration: none;
             color: #333;
-            font-size: 1.8em;
+            font-size: 1.5em;
             font-weight: bold;
         }
+
+
 
         .navbar-menu {
             display: flex;
@@ -58,25 +60,19 @@
         .nav-link {
             text-decoration: none;
             color: #333;
-            padding: 10px 18px;
+            padding: 8px 16px;
             border-radius: 4px;
-            transition: all 0.3s;
-            font-weight: normal;
+            transition: background 0.3s;
         }
 
         .nav-link:hover {
             background: #f0f0f0;
         }
 
-        .nav-link.active {
-            background: #333;
-            color: white;
-        }
-
         .btn-create {
             background: #333;
             color: white;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: normal;
@@ -86,6 +82,7 @@
             background: #555;
         }
 
+
         .user-profile {
             display: flex;
             align-items: center;
@@ -93,8 +90,8 @@
         }
 
         .user-avatar {
-            width: 42px;
-            height: 42px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: #666;
             display: flex;
@@ -102,28 +99,21 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 16px;
-        }
-
-        .profile-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
+            font-size: 14px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #666;
-            font-weight: bold;
-            font-size: 16px;
-            color: white;
-        }
+        }*
+         .user-avatar:hover {
+             transform: scale(1.05);
+             transition: transform 0.3s;
+         }
 
-        .profile-avatar img {
+        .user-avatar img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 50%;
         }
+
 
         /* Hero Section */
         .hero-section {
@@ -495,8 +485,8 @@
         }
 
         .action-btn-form {
-            flex: 1;
-            margin: 0;
+            /*flex: 1;*/
+            /*margin: 0;*/
         }
 
         /* Empty State */
@@ -559,7 +549,7 @@
     DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 %>
 
-<!-- Navigation -->
+<!-- Navigation Bar -->
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
@@ -567,21 +557,18 @@
         </a>
 
         <div class="navbar-menu">
-            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
-                Home
-            </a>
-            <a href="<%= request.getContextPath() %>/trending" class="nav-link active">
-                Trending
+            <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
+                Create Post
             </a>
             <a href="<%= request.getContextPath() %>/saved" class="nav-link">
                 Saved
             </a>
-            <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
-                Create Post
+            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
+                Home
             </a>
 
             <div class="user-profile">
-                <div class="profile-avatar">
+                <div class="user-avatar">
                     <%
                         if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
                     %>
@@ -597,11 +584,10 @@
                         }
                     %>
                 </div>
-
-                <div class="profile-links">
-                    <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
-                    <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
-                </div>
+                <a href="<%= request.getContextPath() %>/profile" class="nav-link">
+                    Profile
+                </a>
+                <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
             </div>
         </div>
     </div>
@@ -701,7 +687,7 @@
                 </h2>
 
                 <% if (post.getDescription() != null && !post.getDescription().isEmpty()) { %>
-                <p class="card-description"><%= post.getDescription() %></p>
+                <p class="card-description" style="cursor: pointer" onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"><%= post.getDescription() %></p>
                 <% } %>
 
                 <div class="progress-section">
