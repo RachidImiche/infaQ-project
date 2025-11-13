@@ -1,10 +1,11 @@
+<!-- login.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - DonationsApp</title>
+    <title>Login - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -13,8 +14,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -24,9 +25,9 @@
 
         .login-container {
             background: white;
-            border-radius: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 40px;
             width: 100%;
             max-width: 450px;
         }
@@ -36,16 +37,12 @@
             margin-bottom: 30px;
         }
 
-        .logo-icon {
-            font-size: 4em;
-            margin-bottom: 10px;
-        }
-
         h1 {
             color: #333;
             text-align: center;
             margin-bottom: 10px;
             font-size: 2em;
+            font-weight: bold;
         }
 
         .subtitle {
@@ -56,71 +53,68 @@
 
         .alert {
             padding: 12px;
-            border-radius: 5px;
+            border-radius: 4px;
             margin-bottom: 20px;
             text-align: center;
+            border: 1px solid;
         }
 
         .alert-error {
             background-color: #ffebee;
             color: #c62828;
-            border: 1px solid #ef5350;
+            border-color: #ef5350;
         }
 
         .alert-success {
             background-color: #e8f5e9;
             color: #2e7d32;
-            border: 1px solid #66bb6a;
+            border-color: #66bb6a;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #333;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
         }
 
         input[type="text"]:focus,
         input[type="password"]:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #666;
         }
 
         .btn {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: normal;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             margin-bottom: 15px;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            background: #555;
         }
 
         .divider {
@@ -154,9 +148,9 @@
         }
 
         .register-link a {
-            color: #667eea;
+            color: #333;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .register-link a:hover {
@@ -167,8 +161,7 @@
 <body>
 <div class="login-container">
     <div class="logo">
-        <div class="logo-icon">🎁</div>
-        <h1>DonationsApp</h1>
+        <h1>infaQ</h1>
         <p class="subtitle">Login to share and support causes</p>
     </div>
 

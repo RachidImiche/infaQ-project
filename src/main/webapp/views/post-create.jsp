@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post - DonationsApp</title>
+    <title>Create Post - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -14,15 +14,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         /* Navigation Bar */
         .navbar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
         }
 
@@ -36,9 +36,6 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
@@ -49,12 +46,12 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         /* Main Content */
@@ -66,9 +63,9 @@
 
         .form-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 30px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         h1 {
@@ -84,27 +81,28 @@
 
         .alert {
             padding: 12px;
-            border-radius: 5px;
+            border-radius: 4px;
             margin-bottom: 20px;
             text-align: center;
+            border: 1px solid;
         }
 
         .alert-error {
             background-color: #ffebee;
             color: #c62828;
-            border: 1px solid #ef5350;
+            border-color: #ef5350;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #333;
-            font-weight: 600;
-            font-size: 15px;
+            font-weight: bold;
+            font-size: 14px;
         }
 
         input[type="text"],
@@ -112,11 +110,10 @@
         textarea,
         select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: border-color 0.3s;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
             font-family: inherit;
         }
 
@@ -125,7 +122,7 @@
         textarea:focus,
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #666;
         }
 
         textarea {
@@ -142,17 +139,16 @@
 
         .file-input-button {
             padding: 12px;
-            background: #f0f2f5;
-            border: 2px dashed #ddd;
-            border-radius: 8px;
+            background: #f9f9f9;
+            border: 1px dashed #ccc;
+            border-radius: 4px;
             cursor: pointer;
             text-align: center;
-            transition: all 0.3s;
         }
 
         .file-input-button:hover {
-            border-color: #667eea;
-            background: #f5f7ff;
+            border-color: #666;
+            background: #f0f0f0;
         }
 
         .file-input-wrapper input[type="file"] {
@@ -172,8 +168,8 @@
         .file-preview img {
             max-width: 100%;
             max-height: 300px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            border: 1px solid #ddd;
         }
 
         .form-actions {
@@ -184,25 +180,23 @@
 
         .btn {
             flex: 1;
-            padding: 14px;
+            padding: 12px;
             border: none;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: normal;
             text-decoration: none;
             text-align: center;
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            background: #555;
         }
 
         .btn-secondary {
@@ -219,7 +213,7 @@
         }
 
         .helper-text {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
             margin-top: 5px;
         }
@@ -240,9 +234,9 @@
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-            <span>🎁</span> DonationsApp
+            infaQ
         </a>
-        <a href="<%= request.getContextPath() %>/feed" class="nav-link">← Back to Feed</a>
+        <a href="<%= request.getContextPath() %>/feed" class="nav-link">Back to Feed</a>
     </div>
 </nav>
 
@@ -276,14 +270,14 @@
                 <label for="category">Category <span class="required">*</span></label>
                 <select id="category" name="category" required>
                     <option value="">Select a category</option>
-                    <option value="Education">📚 Education</option>
-                    <option value="Healthcare">🏥 Healthcare</option>
-                    <option value="Environment">🌱 Environment</option>
-                    <option value="Poverty Relief">🤝 Poverty Relief</option>
-                    <option value="Disaster Relief">🆘 Disaster Relief</option>
-                    <option value="Animal Welfare">🐾 Animal Welfare</option>
-                    <option value="Community Development">🏘️ Community Development</option>
-                    <option value="Other">📌 Other</option>
+                    <option value="Education">Education</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Environment">Environment</option>
+                    <option value="Poverty Relief">Poverty Relief</option>
+                    <option value="Disaster Relief">Disaster Relief</option>
+                    <option value="Animal Welfare">Animal Welfare</option>
+                    <option value="Community Development">Community Development</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
 
@@ -306,7 +300,7 @@
                 <label for="image">Campaign Image</label>
                 <div class="file-input-wrapper">
                     <div class="file-input-button" id="fileInputButton">
-                        📷 Click to upload an image (JPG, PNG, GIF - Max 5MB)
+                        Click to upload an image (JPG, PNG, GIF - Max 5MB)
                     </div>
                     <input type="file" id="image" name="image"
                            accept="image/jpeg,image/jpg,image/png,image/gif">
@@ -339,7 +333,7 @@
     fileInput.addEventListener('change', function() {
         const file = this.files[0];
         if (file) {
-            fileInputButton.textContent = '📷 ' + file.name;
+            fileInputButton.textContent = file.name;
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -348,7 +342,7 @@
             }
             reader.readAsDataURL(file);
         } else {
-            fileInputButton.textContent = '📷 Click to upload an image (JPG, PNG, GIF - Max 5MB)';
+            fileInputButton.textContent = 'Click to upload an image (JPG, PNG, GIF - Max 5MB)';
             filePreview.style.display = 'none';
         }
     });

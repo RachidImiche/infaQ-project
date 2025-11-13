@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Profile - DonationsApp</title>
+    <title>Edit Profile - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -14,14 +14,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         .navbar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
             top: 0;
@@ -38,9 +38,6 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
@@ -51,12 +48,12 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .container {
@@ -67,9 +64,9 @@
 
         .edit-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 40px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .card-header {
@@ -78,7 +75,7 @@
 
         .card-title {
             font-size: 2em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
@@ -94,7 +91,7 @@
 
         .form-label {
             display: block;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 8px;
             font-size: 14px;
@@ -102,18 +99,16 @@
 
         .form-input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: all 0.3s;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
             font-family: inherit;
         }
 
         .form-input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #666;
         }
 
         textarea.form-input {
@@ -131,15 +126,16 @@
             gap: 20px;
             margin-bottom: 20px;
             padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
         }
 
         .current-avatar {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -148,8 +144,7 @@
             font-size: 36px;
             flex-shrink: 0;
             overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #ddd;
         }
 
         .current-avatar img {
@@ -163,7 +158,7 @@
         }
 
         .image-info-title {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 8px;
         }
@@ -188,19 +183,16 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 12px 20px;
-            background: #667eea;
+            padding: 10px 20px;
+            background: #333;
             color: white;
-            border-radius: 8px;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
+            font-weight: normal;
         }
 
         .file-input-label:hover {
-            background: #5568d3;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+            background: #555;
         }
 
         .file-name {
@@ -208,9 +200,10 @@
             font-size: 14px;
             color: #666;
             padding: 8px 12px;
-            background: #f8f9fa;
-            border-radius: 6px;
+            background: #f9f9f9;
+            border-radius: 4px;
             display: none;
+            border: 1px solid #e0e0e0;
         }
 
         .file-name.show {
@@ -224,7 +217,7 @@
             padding: 12px;
             background: #fff3cd;
             border: 1px solid #ffc107;
-            border-radius: 8px;
+            border-radius: 4px;
             margin-top: 15px;
         }
 
@@ -237,7 +230,7 @@
         .checkbox-label {
             cursor: pointer;
             color: #856404;
-            font-weight: 500;
+            font-weight: normal;
             font-size: 14px;
         }
 
@@ -251,13 +244,12 @@
 
         .btn {
             flex: 1;
-            padding: 14px 24px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: normal;
             cursor: pointer;
-            transition: all 0.3s;
             text-align: center;
             text-decoration: none;
             display: inline-flex;
@@ -267,48 +259,45 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            background: #555;
         }
 
         .btn-secondary {
-            background: #f0f2f5;
+            background: #f0f0f0;
             color: #333;
         }
 
         .btn-secondary:hover {
-            background: #e0e2e5;
+            background: #e0e0e0;
         }
 
         .alert {
             padding: 15px 20px;
-            border-radius: 8px;
+            border-radius: 4px;
             margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             font-size: 14px;
+            border: 1px solid;
         }
 
         .alert-error {
             background: #fee;
             color: #c33;
-            border: 1px solid #fcc;
+            border-color: #fcc;
         }
 
         .alert-success {
             background: #efe;
             color: #3c3;
-            border: 1px solid #cfc;
+            border-color: #cfc;
         }
 
         .helper-text {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
             margin-top: 6px;
         }
@@ -359,22 +348,21 @@
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-            <span>🎁</span> DonationsApp
+            infaQ
         </a>
-        <a href="<%= request.getContextPath() %>/profile" class="nav-link">← Back to Profile</a>
+        <a href="<%= request.getContextPath() %>/profile" class="nav-link">Back to Profile</a>
     </div>
 </nav>
 
 <div class="container">
     <div class="edit-card">
         <div class="card-header">
-            <h1 class="card-title">✏️ Edit Profile</h1>
+            <h1 class="card-title">Edit Profile</h1>
             <p class="card-subtitle">Update your profile information</p>
         </div>
 
         <% if (error != null && !error.isEmpty()) { %>
         <div class="alert alert-error">
-            <span>⚠️</span>
             <span><%= error %></span>
         </div>
         <% } %>
@@ -387,20 +375,20 @@
                 <div class="current-image-wrapper">
                     <div class="current-avatar">
                         <% if (user.getProfileImage() != null && !user.getProfileImage().isEmpty()) { %>
-                            <img src="<%= request.getContextPath() %>/<%= user.getProfileImage() %>"
-                                 alt="<%= user.getUsername() %>"
-                                 id="previewImage">
+                        <img src="<%= request.getContextPath() %>/<%= user.getProfileImage() %>"
+                             alt="<%= user.getUsername() %>"
+                             id="previewImage">
                         <% } else { %>
-                            <span id="avatarInitial"><%= user.getUsername().substring(0, 1).toUpperCase() %></span>
+                        <span id="avatarInitial"><%= user.getUsername().substring(0, 1).toUpperCase() %></span>
                         <% } %>
                     </div>
                     <div class="image-info">
                         <div class="image-info-title">Current Profile Picture</div>
                         <div class="image-info-text">
                             <% if (user.getProfileImage() != null && !user.getProfileImage().isEmpty()) { %>
-                                You have a profile picture set
+                            You have a profile picture set
                             <% } else { %>
-                                No profile picture set (using default avatar)
+                            No profile picture set (using default avatar)
                             <% } %>
                         </div>
                     </div>
@@ -414,7 +402,6 @@
                            accept="image/jpeg,image/png,image/gif"
                            onchange="handleFileSelect(this)">
                     <label for="profileImage" class="file-input-label">
-                        <span>📷</span>
                         <span>Choose New Picture</span>
                     </label>
                     <div id="fileName" class="file-name"></div>
@@ -432,7 +419,7 @@
                            value="true"
                            class="checkbox-input">
                     <label for="removeImage" class="checkbox-label">
-                        🗑️ Remove current profile picture
+                        Remove current profile picture
                     </label>
                 </div>
                 <% } %>
@@ -469,11 +456,9 @@
             <!-- Form Actions -->
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary">
-                    <span>💾</span>
                     <span>Save Changes</span>
                 </button>
                 <a href="<%= request.getContextPath() %>/profile" class="btn btn-secondary">
-                    <span>✖️</span>
                     <span>Cancel</span>
                 </a>
             </div>
@@ -510,7 +495,7 @@
             }
 
             // Show file name
-            fileName.textContent = '📎 ' + file.name;
+            fileName.textContent = file.name;
             fileName.classList.add('show');
 
             // Uncheck remove checkbox if checked
@@ -572,4 +557,3 @@
 </script>
 </body>
 </html>
-

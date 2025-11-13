@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= request.getAttribute("pageTitle") %> - DonationsApp</title>
+    <title>Feed - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -18,15 +18,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         /* Navigation Bar */
         .navbar {
-            background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
             top: 0;
@@ -43,24 +43,10 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
             font-weight: bold;
-        }
-        .post-title {
-            font-size: 1.5em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .post-title:hover {
-            color: #667eea;
-            transition: color 0.3s;
         }
 
         .navbar-search {
@@ -75,28 +61,33 @@
 
         .search-input {
             width: 100%;
-            padding: 10px 40px 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
+            padding: 8px 80px 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             font-size: 14px;
-            background: #f0f2f5;
         }
 
         .search-input:focus {
             outline: none;
-            background: white;
-            border-color: #667eea;
+            border-color: #666;
         }
 
         .search-btn {
             position: absolute;
-            right: 10px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            background: none;
+            background: #333;
+            color: white;
             border: none;
+            padding: 4px 12px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+
+        .search-btn:hover {
+            background: #555;
         }
 
         .navbar-menu {
@@ -109,29 +100,25 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .btn-create {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 8px 16px;
+            border-radius: 4px;
             text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
+            font-weight: normal;
         }
 
         .btn-create:hover {
-            transform: translateY(-2px);
+            background: #555;
         }
 
         .user-profile {
@@ -141,15 +128,16 @@
         }
 
         .user-avatar {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
+            font-size: 14px;
         }
 
         /* Main Content */
@@ -162,17 +150,17 @@
         /* Category Filter */
         .category-filter {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .category-title {
             font-size: 14px;
             color: #666;
             margin-bottom: 12px;
-            font-weight: 600;
+            font-weight: bold;
         }
 
         .category-buttons {
@@ -182,9 +170,9 @@
         }
 
         .category-btn {
-            padding: 8px 16px;
-            border: 2px solid #ddd;
-            border-radius: 20px;
+            padding: 6px 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
             background: white;
             cursor: pointer;
             font-size: 14px;
@@ -194,23 +182,22 @@
         }
 
         .category-btn:hover {
-            border-color: #667eea;
-            color: #667eea;
+            border-color: #666;
+            background: #f9f9f9;
         }
 
         .category-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
-            border-color: transparent;
+            border-color: #333;
         }
 
         /* Post Card */
         .post-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
 
         .post-header {
@@ -218,19 +205,20 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .post-author-avatar {
-            width: 45px;
-            height: 45px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .post-author-info {
@@ -238,7 +226,7 @@
         }
 
         .post-author-name {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 2px;
         }
@@ -249,18 +237,20 @@
         }
 
         .post-category-badge {
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 4px 10px;
+            border-radius: 3px;
             font-size: 12px;
-            font-weight: 600;
-            background: #e3f2fd;
-            color: #1976d2;
+            font-weight: normal;
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
         }
 
         .post-image {
             width: 100%;
             max-height: 500px;
             object-fit: cover;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .post-content {
@@ -269,7 +259,7 @@
 
         .post-title {
             font-size: 1.5em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
@@ -281,10 +271,11 @@
         }
 
         .post-progress {
-            background: #f0f2f5;
-            padding: 20px;
-            border-radius: 10px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
             margin-bottom: 15px;
+            border: 1px solid #e0e0e0;
         }
 
         .progress-row {
@@ -299,7 +290,7 @@
         }
 
         .progress-value {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             font-size: 16px;
         }
@@ -307,15 +298,15 @@
         .progress-bar {
             width: 100%;
             height: 8px;
-            background: #ddd;
-            border-radius: 10px;
+            background: #e0e0e0;
+            border-radius: 4px;
             overflow: hidden;
             margin-top: 10px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
             transition: width 0.5s;
         }
 
@@ -340,42 +331,25 @@
             border: none;
             background: none;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             color: #666;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
-        .profile-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #eee;
-            font-weight: bold;
-            font-size: 18px;
-            color: #555;
-        }
-
-        .profile-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
 
         .action-btn:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .action-btn.liked {
             color: #e74c3c;
+        }
+        .action-btn.saved {
+            color: #075df3;
         }
 
         .action-btn-form {
@@ -387,30 +361,28 @@
             text-align: center;
             padding: 60px 20px;
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            border: 1px solid #ddd;
         }
 
         .empty-state-icon {
-            font-size: 4em;
+            font-size: 3em;
             margin-bottom: 20px;
+            color: #999;
         }
 
         .empty-state h2 {
             color: #666;
             margin-bottom: 10px;
         }
+
         .post-author-name:hover {
-            color: #667eea !important;
+            color: #555 !important;
         }
 
         .post-author-avatar:hover {
             transform: scale(1.05);
             transition: transform 0.3s;
-        }
-
-        .post-author-name:hover {
-            color: #667eea !important;
         }
     </style>
 </head>
@@ -425,7 +397,6 @@
     List<Post> posts = (List<Post>) request.getAttribute("posts");
     Map<Long, Boolean> likedPosts = (Map<Long, Boolean>) request.getAttribute("likedPosts");
     Map<Long, Boolean> savedPosts = (Map<Long, Boolean>) request.getAttribute("savedPosts");
-
     String selectedCategory = (String) request.getAttribute("selectedCategory");
     String searchQuery = (String) request.getAttribute("searchQuery");
 
@@ -436,7 +407,7 @@
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-            <span>🎁</span> DonationsApp
+            infaQ
         </a>
 
         <div class="navbar-search">
@@ -444,51 +415,31 @@
                 <input type="text" name="search" class="search-input"
                        placeholder="Search donation posts..."
                        value="<%= searchQuery != null ? searchQuery : "" %>">
-                <button type="submit" class="search-btn">🔍</button>
+                <button type="submit" class="search-btn">Search</button>
             </form>
         </div>
 
 
         <div class="navbar-menu">
-            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
-                🏠 Home
+            <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
+                Create Post
             </a>
             <a href="<%= request.getContextPath() %>/trending" class="nav-link">
-                🔥 Trending
+                Trending
             </a>
-            <a href="<%= request.getContextPath() %>/saved" class="nav-link">
-                🔖 Saved
+ <a href="<%= request.getContextPath() %>/saved" class="nav-link">
+                Saved
             </a>
-            <a href="<%= request.getContextPath() %>/posts/create" class="btn-create">
-                ➕ Create Post
-            </a>
+
             <div class="user-profile">
-                <div class="profile-avatar">
-                    <%
-
-
-                            if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
-                    %>
-                    <img src="<%= request.getContextPath() %>/<%= currentUser.getProfileImage() %>"
-                         alt="<%= currentUser.getUsername() %>"
-                         data-initial="<%= currentUser.getUsername().substring(0,1).toUpperCase() %>"
-                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
-                    <%
-                    } else {
-                    %>
+                <div class="user-avatar">
                     <%= currentUser.getUsername().substring(0, 1).toUpperCase() %>
-                    <%
-
-                        }
-                    %>
                 </div>
-
-                <div class="profile-links">
-                    <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
-                    <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
-                </div>
+                <a href="<%= request.getContextPath() %>/profile" class="nav-link">
+                    Profile
+                </a>
+                <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
             </div>
-
         </div>
     </div>
 </nav>
@@ -505,27 +456,27 @@
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Education"
                class="category-btn <%= "Education".equals(selectedCategory) ? "active" : "" %>">
-                📚 Education
+                Education
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Healthcare"
                class="category-btn <%= "Healthcare".equals(selectedCategory) ? "active" : "" %>">
-                🏥 Healthcare
+                Healthcare
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Environment"
                class="category-btn <%= "Environment".equals(selectedCategory) ? "active" : "" %>">
-                🌱 Environment
+                Environment
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Poverty Relief"
                class="category-btn <%= "Poverty Relief".equals(selectedCategory) ? "active" : "" %>">
-                🤝 Poverty Relief
+                Poverty Relief
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Disaster Relief"
                class="category-btn <%= "Disaster Relief".equals(selectedCategory) ? "active" : "" %>">
-                🆘 Disaster Relief
+                Disaster Relief
             </a>
             <a href="<%= request.getContextPath() %>/feed?category=Animal Welfare"
                class="category-btn <%= "Animal Welfare".equals(selectedCategory) ? "active" : "" %>">
-                🐾 Animal Welfare
+                Animal Welfare
             </a>
         </div>
     </div>
@@ -535,7 +486,7 @@
         if (posts == null || posts.isEmpty()) {
     %>
     <div class="empty-state">
-        <div class="empty-state-icon">📭</div>
+        <div class="empty-state-icon">No posts</div>
         <h2>No posts found</h2>
         <p>Be the first to create a donation post!</p>
     </div>
@@ -550,39 +501,21 @@
 
             boolean isLiked = likedPosts.get(post.getId()) != null && likedPosts.get(post.getId());
             boolean isSaved = savedPosts.get(post.getId()) != null && savedPosts.get(post.getId());
+
     %>
     <div class="post-card">
         <!-- Post Header -->
-        <div class="user-profile">
-            <div class="profile-avatar">
-                <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>" style="text-decoration: none; color: inherit; display: flex; width:100%; height:100%; align-items:center; justify-content:center;">
-                <%
-                    String authorProfileImage = post.getAuthor().getProfileImage();
-                    if (authorProfileImage != null && !authorProfileImage.isEmpty()) {
-                %>
-                <img src="<%= request.getContextPath() %>/<%= authorProfileImage %>"
-                     alt="<%= post.getAuthor().getUsername() %>"
-                     data-initial="<%= post.getAuthor().getUsername().substring(0,1).toUpperCase() %>"
-                     onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
-                <%
-                    } else {
-                %>
+        <div class="post-header">
+            <div class="post-author-avatar">
                 <%= post.getAuthor().getUsername().substring(0, 1).toUpperCase() %>
-                <%
-                    }
-                %>
-                </a>
             </div>
-             <div class="post-author-info">
-                 <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
-                    style="text-decoration: none;">
-                     <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
-                         <%= post.getAuthor().getUsername() %>
-                     </div>
-                 </a>
-                <% if (post.getAuthor().getFullName() != null && !post.getAuthor().getFullName().isEmpty()) { %>
-                    <div style="font-size: 12px; color: #999;"><%= post.getAuthor().getFullName() %></div>
-                <% } %>
+            <div class="post-author-info">
+                <a href="<%= request.getContextPath() %>/profile?username=<%= post.getAuthor().getUsername() %>"
+                   style="text-decoration: none;">
+                    <div class="post-author-name" style="cursor: pointer; transition: color 0.3s;">
+                        <%= post.getAuthor().getUsername() %>
+                    </div>
+                </a>
                 <div class="post-date"><%= post.getCreatedAt().format(formatter) %></div>
             </div>
             <div class="post-category-badge"><%= post.getCategory() %></div>
@@ -593,21 +526,16 @@
             if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) {
         %>
         <img src="<%= request.getContextPath() %>/<%= post.getImageUrl() %>"
-             alt="<%= post.getTitle() %>"
-             class="post-image"
-             onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"
-             style="cursor: pointer;">
+             alt="<%= post.getTitle() %>" class="post-image">
         <%
             }
         %>
 
         <!-- Post Content -->
         <div class="post-content">
-            <div onclick="window.location.href='<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>'"
-                 style="cursor: pointer;">
             <h2 class="post-title"><%= post.getTitle() %></h2>
             <p class="post-description"><%= post.getDescription() %></p>
-            </div>
+
             <div class="post-progress">
                 <div class="progress-row">
                     <span class="progress-label">Raised</span>
@@ -625,10 +553,9 @@
 
         <!-- Post Stats -->
         <div class="post-stats">
-            <span>❤️ <%= post.getLikesCount() %> likes</span>
-            <span>💬 <%= post.getCommentsCount() %> comments</span>
-            <span>🎁 <%= post.getDonationsCount() %> donations</span>
-            <span>👁️ <%= post.getViewCount() %> views</span>
+            <span><%= post.getLikesCount() %> likes</span>
+            <span><%= post.getCommentsCount() %> comments</span>
+            <span><%= post.getDonationsCount() %> donations</span>
         </div>
 
         <!-- Post Actions -->
@@ -639,18 +566,18 @@
                 <input type="hidden" name="postId" value="<%= post.getId() %>">
                 <input type="hidden" name="action" value="<%= isLiked ? "unlike" : "like" %>">
                 <button type="submit" class="action-btn <%= isLiked ? "liked" : "" %>">
-                    <%= isLiked ? "❤️" : "🤍" %> <%= isLiked ? "Liked" : "Like" %>
+                    <%= isLiked ? "Liked" : "Like" %>
                 </button>
             </form>
 
             <a href="<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>"
                class="action-btn">
-                💬 Comment
+                Comment
             </a>
 
             <a href="<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>"
                class="action-btn">
-                🎁 Donate
+                Donate
             </a>
 
             <form method="POST"
@@ -659,25 +586,26 @@
                 <input type="hidden" name="postId" value="<%= post.getId() %>">
                 <input type="hidden" name="action" value="<%= isSaved ? "unsave" : "save" %>">
                 <button type="submit" class="action-btn <%= isSaved ? "saved" : "" %>">
-                    <%= isSaved ? "🔖 Saved" : "📌 Save" %>
+                    <%= isSaved ? "Saved" : "Save" %>
                 </button>
             </form>
         </div>
+
 
         <%
             if (post.getAuthor().getId().equals(currentUser.getId())) {
         %>
         <div style="padding: 10px 20px; border-top: 1px solid #e0e0e0; display: flex; gap: 10px;">
             <a href="<%= request.getContextPath() %>/posts/edit?id=<%= post.getId() %>"
-               style="flex: 1; padding: 10px; text-align: center; background: #ff9800; color: white; text-decoration: none; border-radius: 5px; font-weight: 500;">
-                ✏️ Edit Post
+               style="flex: 1; padding: 10px; text-align: center; background: #ff9800; color: white; text-decoration: none; border-radius: 4px; font-weight: normal;">
+                Edit Post
             </a>
             <form method="POST" action="<%= request.getContextPath() %>/posts/delete"
                   onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');"
                   style="flex: 1; margin: 0;">
                 <input type="hidden" name="id" value="<%= post.getId() %>">
-                <button type="submit" style="width: 100%; padding: 10px; background: #f44336; color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: 500;">
-                    🗑️ Delete Post
+                <button type="submit" style="width: 100%; padding: 10px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: normal;">
+                    Delete Post
                 </button>
             </form>
         </div>

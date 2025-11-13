@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saved - DonationsApp</title>
+    <title>Saved - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -19,15 +19,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         /* Navigation Bar */
         .navbar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
             top: 0;
@@ -44,9 +44,6 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
@@ -63,15 +60,12 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .user-profile {
@@ -84,7 +78,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -125,12 +119,9 @@
 
         .page-title {
             font-size: 2em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
         }
 
         .page-subtitle {
@@ -161,9 +152,9 @@
         /* Post Card */
         .post-card {
             background: white;
-            border-radius: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
             flex-direction: column;
@@ -172,14 +163,14 @@
 
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .post-image-container {
             width: 100%;
             height: 220px;
             overflow: hidden;
-            background: #f0f2f5;
+            background: #f0f0f0;
             position: relative;
         }
 
@@ -195,9 +186,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             color: white;
-            font-size: 4em;
+            font-size: 3em;
         }
 
         .post-category-badge {
@@ -205,12 +196,12 @@
             top: 12px;
             left: 12px;
             padding: 6px 14px;
-            border-radius: 20px;
+            border-radius: 3px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: normal;
             background: rgba(255, 255, 255, 0.95);
-            color: #667eea;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            color: #333;
+            border: 1px solid #ddd;
         }
 
         .post-content {
@@ -235,7 +226,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             color: white;
             font-weight: bold;
             font-size: 14px;
@@ -252,14 +243,14 @@
         }
 
         .post-author-name {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             font-size: 14px;
             text-decoration: none;
         }
 
         .post-author-name:hover {
-            color: #667eea;
+            color: #555;
         }
 
         .post-date {
@@ -269,7 +260,7 @@
 
         .post-title {
             font-size: 1.2em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 12px;
             line-height: 1.4;
@@ -286,7 +277,7 @@
         }
 
         .post-title-link:hover {
-            color: #667eea;
+            color: #555;
         }
 
         .post-description {
@@ -314,7 +305,7 @@
         }
 
         .progress-amount {
-            font-weight: 600;
+            font-weight: bold;
             color: #4CAF50;
         }
 
@@ -326,13 +317,13 @@
             width: 100%;
             height: 8px;
             background: #e0e0e0;
-            border-radius: 10px;
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
             transition: width 0.3s;
         }
 
@@ -355,7 +346,7 @@
             flex: 1;
             padding: 10px;
             border: none;
-            background: #f0f2f5;
+            background: #f0f0f0;
             cursor: pointer;
             font-size: 14px;
             color: #666;
@@ -363,9 +354,9 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: all 0.3s;
-            font-weight: 500;
+            font-weight: normal;
             text-decoration: none;
         }
 
@@ -378,7 +369,7 @@
         }
 
         .action-btn.saved {
-            color: #667eea;
+            color: #333;
         }
 
         .action-btn-form {
@@ -390,19 +381,20 @@
             text-align: center;
             padding: 80px 20px;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
 
         .empty-icon {
-            font-size: 5em;
+            font-size: 4em;
             margin-bottom: 20px;
             opacity: 0.5;
+            color: #999;
         }
 
         .empty-title {
             font-size: 1.8em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 10px;
         }
@@ -415,209 +407,206 @@
 
         .btn-primary {
             display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             padding: 12px 30px;
-            border-radius: 8px;
+            border-radius: 4px;
             text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s;
+            font-weight: normal;
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
+            background: #555;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="navbar-content">
-            <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-                <span>💝</span>
-                <span>InfaQ</span>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar-content">
+        <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
+            infaQ
+        </a>
+
+        <div class="navbar-menu">
+            <a href="<%= request.getContextPath() %>/feed" class="nav-link">
+                Feed
+            </a>
+            <a href="<%= request.getContextPath() %>/trending" class="nav-link">
+                Trending
+            </a>
+            <a href="<%= request.getContextPath() %>/saved" class="nav-link" style="background: #f0f0f0;">
+                Saved
+            </a>
+            <a href="<%= request.getContextPath() %>/posts/create" class="nav-link">
+                Create
             </a>
 
-            <div class="navbar-menu">
-                <a href="<%= request.getContextPath() %>/feed" class="nav-link">
-                    <span>🏠</span> Feed
-                </a>
-                <a href="<%= request.getContextPath() %>/trending" class="nav-link">
-                    <span>🔥</span> Trending
-                </a>
-                <a href="<%= request.getContextPath() %>/saved" class="nav-link" style="background: #f0f2f5;">
-                    <span>🔖</span> Saved
-                </a>
-                <a href="<%= request.getContextPath() %>/posts/create" class="nav-link">
-                    <span>➕</span> Create
-                </a>
-
-                <div class="user-profile">
+            <div class="user-profile">
+                <%
+                    User currentUser = (User) session.getAttribute("user");
+                %>
+                <div class="profile-avatar">
                     <%
-                        User currentUser = (User) session.getAttribute("user");
-                     %>
-                    <div class="profile-avatar">
-                        <%
-                            if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
-                        %>
-                        <img src="<%= request.getContextPath() %>/<%= currentUser.getProfileImage() %>"
-                             alt="<%= currentUser.getUsername() %>"
-                             data-initial="<%= currentUser.getUsername().substring(0,1).toUpperCase() %>"
-                             onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
-                        <%
-                            } else {
-                        %>
-                        <%= currentUser.getUsername().substring(0, 1).toUpperCase() %>
-                        <%
-                            }
-                        %>
-                    </div>
+                        if (currentUser.getProfileImage() != null && !currentUser.getProfileImage().isEmpty()) {
+                    %>
+                    <img src="<%= request.getContextPath() %>/<%= currentUser.getProfileImage() %>"
+                         alt="<%= currentUser.getUsername() %>"
+                         data-initial="<%= currentUser.getUsername().substring(0,1).toUpperCase() %>"
+                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                    <%
+                    } else {
+                    %>
+                    <%= currentUser.getUsername().substring(0, 1).toUpperCase() %>
+                    <%
+                        }
+                    %>
+                </div>
 
-                    <div class="profile-links">
-                        <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
-                        <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
-                    </div>
+                <div class="profile-links">
+                    <a href="<%= request.getContextPath() %>/profile" class="nav-link">Profile</a>
+                    <a href="<%= request.getContextPath() %>/logout" class="nav-link">Logout</a>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="page-header">
-            <h1 class="page-title">
-                <span>🔖</span>
-                Saved Posts
-            </h1>
-            <p class="page-subtitle">Posts you've saved for later</p>
-        </div>
+<!-- Main Content -->
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">
+            Saved Posts
+        </h1>
+        <p class="page-subtitle">Posts you've saved for later</p>
+    </div>
 
-        <%
-            List<SavedPost> savedPosts = (List<SavedPost>) request.getAttribute("savedPosts");
-            Map<Long, Boolean> likedPosts = (Map<Long, Boolean>) request.getAttribute("likedPosts");
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+    <%
+        List<SavedPost> savedPosts = (List<SavedPost>) request.getAttribute("savedPosts");
+        Map<Long, Boolean> likedPosts = (Map<Long, Boolean>) request.getAttribute("likedPosts");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+    %>
+
+    <% if (savedPosts == null || savedPosts.isEmpty()) { %>
+    <div class="empty-state">
+        <div class="empty-icon">No saved posts</div>
+        <h2 class="empty-title">No saved posts yet</h2>
+        <p class="empty-message">Start exploring and save posts that interest you!</p>
+        <a href="<%= request.getContextPath() %>/feed" class="btn-primary">Explore Posts</a>
+    </div>
+    <% } else { %>
+    <div class="posts-grid">
+        <% for (SavedPost savedPost : savedPosts) {
+            Post post = savedPost.getPost();
+            User author = post.getAuthor();
+            String authorInitial = author.getUsername().substring(0, 1).toUpperCase();
+            boolean isLiked = likedPosts.getOrDefault(post.getId(), false);
+
+            double progress = 0;
+            if (post.getGoalAmount().doubleValue() > 0) {
+                progress = (post.getCollectedAmount().doubleValue() / post.getGoalAmount().doubleValue()) * 100;
+                if (progress > 100) progress = 100;
+            }
         %>
+        <div class="post-card">
+            <div class="post-image-container">
+                <% if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) { %>
+                <img src="<%= request.getContextPath() %>/<%= post.getImageUrl() %>"
+                     alt="<%= post.getTitle() %>"
+                     class="post-image">
+                <% } else { %>
+                <div class="no-image">No Image</div>
+                <% } %>
 
-        <% if (savedPosts == null || savedPosts.isEmpty()) { %>
-            <div class="empty-state">
-                <div class="empty-icon">🔖</div>
-                <h2 class="empty-title">No saved posts yet</h2>
-                <p class="empty-message">Start exploring and save posts that interest you!</p>
-                <a href="<%= request.getContextPath() %>/feed" class="btn-primary">Explore Posts</a>
-            </div>
-        <% } else { %>
-            <div class="posts-grid">
-                <% for (SavedPost savedPost : savedPosts) {
-                    Post post = savedPost.getPost();
-                    User author = post.getAuthor();
-                    String authorInitial = author.getUsername().substring(0, 1).toUpperCase();
-                    boolean isLiked = likedPosts.getOrDefault(post.getId(), false);
-
-                    double progress = 0;
-                    if (post.getGoalAmount().doubleValue() > 0) {
-                        progress = (post.getCollectedAmount().doubleValue() / post.getGoalAmount().doubleValue()) * 100;
-                        if (progress > 100) progress = 100;
-                    }
-                %>
-                    <div class="post-card">
-                        <div class="post-image-container">
-                            <% if (post.getImageUrl() != null && !post.getImageUrl().isEmpty()) { %>
-                                <img src="<%= request.getContextPath() %>/<%= post.getImageUrl() %>"
-                                     alt="<%= post.getTitle() %>"
-                                     class="post-image">
-                            <% } else { %>
-                                <div class="no-image">💝</div>
-                            <% } %>
-
-                            <% if (post.getCategory() != null && !post.getCategory().isEmpty()) { %>
-                                <span class="post-category-badge"><%= post.getCategory() %></span>
-                            <% } %>
-                        </div>
-
-                        <div class="post-content">
-                            <div class="post-header">
-                                <div class="post-author-avatar">
-                                    <a href="<%= request.getContextPath() %>/profile?username=<%= author.getUsername() %>" style="text-decoration: none; color: inherit; display: flex; width:100%; height:100%; align-items:center; justify-content:center;">
-                                    <%
-                                        String authorProfileImage = author.getProfileImage();
-                                        if (authorProfileImage != null && !authorProfileImage.isEmpty()) {
-                                    %>
-                                    <img src="<%= request.getContextPath() %>/<%= authorProfileImage %>"
-                                         alt="<%= author.getUsername() %>"
-                                         data-initial="<%= authorInitial %>"
-                                         onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
-                                    <%
-                                        } else {
-                                    %>
-                                    <%= authorInitial %>
-                                    <%
-                                        }
-                                    %>
-                                    </a>
-                                </div>
-                                <div class="post-author-info">
-                                    <a href="<%= request.getContextPath() %>/profile?username=<%= author.getUsername() %>"
-                                       class="post-author-name">
-                                        <%= author.getUsername() %>
-                                    </a>
-                                    <% if (author.getFullName() != null && !author.getFullName().isEmpty()) { %>
-                                        <div style="font-size: 11px; color: #999;"><%= author.getFullName() %></div>
-                                    <% } %>
-                                    <div class="post-date">
-                                        Saved <%= savedPost.getSavedAt().format(dateFormatter) %>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="post-title">
-                                <a href="<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>"
-                                   class="post-title-link">
-                                    <%= post.getTitle() %>
-                                </a>
-                            </h2>
-
-                            <% if (post.getDescription() != null && !post.getDescription().isEmpty()) { %>
-                                <p class="post-description"><%= post.getDescription() %></p>
-                            <% } %>
-
-                            <div class="post-progress">
-                                <div class="progress-info">
-                                    <span class="progress-amount">$<%= String.format("%.2f", post.getCollectedAmount()) %></span>
-                                    <span class="progress-goal">of $<%= String.format("%.2f", post.getGoalAmount()) %></span>
-                                </div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: <%= progress %>%"></div>
-                                </div>
-                            </div>
-
-                            <div class="post-stats">
-                                <span>❤️ <%= post.getLikesCount() %></span>
-                                <span>💬 <%= post.getCommentsCount() %></span>
-                                <span>👁️ <%= post.getViewCount() %></span>
-                            </div>
-
-                            <div class="post-actions">
-                                <form action="<%= request.getContextPath() %>/posts/like" method="post" class="action-btn-form">
-                                    <input type="hidden" name="postId" value="<%= post.getId() %>">
-                                    <input type="hidden" name="action" value="<%= isLiked ? "unlike" : "like" %>">
-                                    <button type="submit" class="action-btn <%= isLiked ? "liked" : "" %>">
-                                        <%= isLiked ? "❤️" : "🤍" %> Like
-                                    </button>
-                                </form>
-
-                                <form action="<%= request.getContextPath() %>/posts/save" method="post" class="action-btn-form">
-                                    <input type="hidden" name="postId" value="<%= post.getId() %>">
-                                    <input type="hidden" name="action" value="unsave">
-                                    <button type="submit" class="action-btn saved">
-                                        🔖 Unsave
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                <% if (post.getCategory() != null && !post.getCategory().isEmpty()) { %>
+                <span class="post-category-badge"><%= post.getCategory() %></span>
                 <% } %>
             </div>
+
+            <div class="post-content">
+                <div class="post-header">
+                    <div class="post-author-avatar">
+                        <a href="<%= request.getContextPath() %>/profile?username=<%= author.getUsername() %>" style="text-decoration: none; color: inherit; display: flex; width:100%; height:100%; align-items:center; justify-content:center;">
+                            <%
+                                String authorProfileImage = author.getProfileImage();
+                                if (authorProfileImage != null && !authorProfileImage.isEmpty()) {
+                            %>
+                            <img src="<%= request.getContextPath() %>/<%= authorProfileImage %>"
+                                 alt="<%= author.getUsername() %>"
+                                 data-initial="<%= authorInitial %>"
+                                 onerror="this.style.display='none';this.parentElement.textContent=this.getAttribute('data-initial');">
+                            <%
+                            } else {
+                            %>
+                            <%= authorInitial %>
+                            <%
+                                }
+                            %>
+                        </a>
+                    </div>
+                    <div class="post-author-info">
+                        <a href="<%= request.getContextPath() %>/profile?username=<%= author.getUsername() %>"
+                           class="post-author-name">
+                            <%= author.getUsername() %>
+                        </a>
+                        <% if (author.getFullName() != null && !author.getFullName().isEmpty()) { %>
+                        <div style="font-size: 11px; color: #999;"><%= author.getFullName() %></div>
+                        <% } %>
+                        <div class="post-date">
+                            Saved <%= savedPost.getSavedAt().format(dateFormatter) %>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="post-title">
+                    <a href="<%= request.getContextPath() %>/posts/details?id=<%= post.getId() %>"
+                       class="post-title-link">
+                        <%= post.getTitle() %>
+                    </a>
+                </h2>
+
+                <% if (post.getDescription() != null && !post.getDescription().isEmpty()) { %>
+                <p class="post-description"><%= post.getDescription() %></p>
+                <% } %>
+
+                <div class="post-progress">
+                    <div class="progress-info">
+                        <span class="progress-amount">$<%= String.format("%.2f", post.getCollectedAmount()) %></span>
+                        <span class="progress-goal">of $<%= String.format("%.2f", post.getGoalAmount()) %></span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: <%= progress %>%"></div>
+                    </div>
+                </div>
+
+                <div class="post-stats">
+                    <span><%= post.getLikesCount() %> likes</span>
+                    <span><%= post.getCommentsCount() %> comments</span>
+                    <span><%= post.getViewCount() %> views</span>
+                </div>
+
+                <div class="post-actions">
+                    <form action="<%= request.getContextPath() %>/posts/like" method="post" class="action-btn-form">
+                        <input type="hidden" name="postId" value="<%= post.getId() %>">
+                        <input type="hidden" name="action" value="<%= isLiked ? "unlike" : "like" %>">
+                        <button type="submit" class="action-btn <%= isLiked ? "liked" : "" %>">
+                            <%= isLiked ? "Liked" : "Like" %>
+                        </button>
+                    </form>
+
+                    <form action="<%= request.getContextPath() %>/posts/save" method="post" class="action-btn-form">
+                        <input type="hidden" name="postId" value="<%= post.getId() %>">
+                        <input type="hidden" name="action" value="unsave">
+                        <button type="submit" class="action-btn saved">
+                            Unsave
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
         <% } %>
     </div>
+    <% } %>
+</div>
 </body>
 </html>

@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post Details - DonationsApp</title>
+    <title>Post Details - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -19,14 +19,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         .navbar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
         }
 
@@ -40,9 +40,6 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
@@ -53,12 +50,12 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .container {
@@ -70,30 +67,24 @@
         .copy-link-btn {
             width: 100%;
             padding: 12px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: normal;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .copy-link-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .copy-link-btn:active {
-            transform: translateY(0);
+            background: #555;
         }
 
         .post-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             overflow: hidden;
         }
 
@@ -103,10 +94,11 @@
             align-items: center;
             gap: 15px;
         }
+
         .post-author-name:hover,
         .donation-user a:hover,
         .comment-author a:hover {
-            color: #667eea !important;
+            color: #555 !important;
         }
 
         .post-author-avatar:hover,
@@ -120,7 +112,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -134,7 +126,7 @@
         }
 
         .post-author-name {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             font-size: 16px;
             margin-bottom: 3px;
@@ -147,17 +139,19 @@
 
         .post-category-badge {
             padding: 6px 14px;
-            border-radius: 15px;
+            border-radius: 3px;
             font-size: 13px;
-            font-weight: 600;
-            background: #e3f2fd;
-            color: #1976d2;
+            font-weight: normal;
+            background: #f0f0f0;
+            color: #333;
+            border: 1px solid #ddd;
         }
 
         .post-image {
             width: 100%;
             max-height: 500px;
             object-fit: cover;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .post-content {
@@ -166,7 +160,7 @@
 
         .post-title {
             font-size: 1.8em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 15px;
             line-height: 1.3;
@@ -180,10 +174,11 @@
         }
 
         .post-progress {
-            background: #f0f2f5;
-            padding: 25px;
-            border-radius: 10px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
             margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
         }
 
         .progress-row {
@@ -198,7 +193,7 @@
         }
 
         .progress-value {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             font-size: 18px;
         }
@@ -206,15 +201,15 @@
         .progress-bar {
             width: 100%;
             height: 10px;
-            background: #ddd;
-            border-radius: 10px;
+            background: #e0e0e0;
+            border-radius: 4px;
             overflow: hidden;
             margin-top: 12px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
         }
 
         .post-stats {
@@ -238,46 +233,46 @@
             border: none;
             background: none;
             cursor: pointer;
-            font-size: 15px;
+            font-size: 14px;
             color: #666;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: background 0.3s;
-            font-weight: 500;
+            font-weight: normal;
         }
 
         .action-btn:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .action-btn.liked {
             color: #e74c3c;
         }
+        .action-btn.saved {
+            color: #075df3;
+        }
 
         .action-btn-form {
-            flex: 1;
-            margin: 0;
+            /*flex: 1;*/
+            /*margin: 0;*/
         }
 
         .donation-section, .comments-section, .donations-section {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 25px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .section-title {
             font-size: 1.3em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .form-group {
@@ -286,26 +281,25 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: #333;
-            font-weight: 500;
+            font-weight: bold;
         }
 
         input[type="number"],
         textarea {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 15px;
-            transition: border-color 0.3s;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
             font-family: inherit;
         }
 
         input[type="number"]:focus,
         textarea:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #666;
         }
 
         textarea {
@@ -327,20 +321,18 @@
 
         .btn-donate {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            padding: 12px;
+            background: #4CAF50;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: normal;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .btn-donate:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+            background: #45a049;
         }
 
         .comment-form textarea {
@@ -349,19 +341,17 @@
 
         .btn-comment {
             padding: 10px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: normal;
             cursor: pointer;
-            transition: all 0.3s;
         }
 
         .btn-comment:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+            background: #555;
         }
 
         .comments-list {
@@ -387,7 +377,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -401,7 +391,7 @@
         }
 
         .comment-author {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 5px;
         }
@@ -422,9 +412,10 @@
             align-items: center;
             gap: 15px;
             padding: 15px;
-            background: #f9fafb;
-            border-radius: 8px;
+            background: #f9f9f9;
+            border-radius: 4px;
             margin-bottom: 12px;
+            border: 1px solid #e0e0e0;
         }
 
         .donation-item:last-child {
@@ -435,7 +426,7 @@
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -450,7 +441,7 @@
         }
 
         .donation-user {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 3px;
         }
@@ -463,7 +454,7 @@
 
         .donation-amount {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: bold;
             color: #4CAF50;
         }
 
@@ -506,9 +497,9 @@
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-            <span>🎁</span> DonationsApp
+            infaQ
         </a>
-        <a href="<%= request.getContextPath() %>/feed" class="nav-link">← Back to Feed</a>
+        <a href="<%= request.getContextPath() %>/feed" class="nav-link">Back to Feed</a>
     </div>
 </nav>
 
@@ -526,7 +517,7 @@
                         <%= post.getAuthor().getUsername() %>
                     </div>
                     <% if (post.getAuthor().getFullName() != null && !post.getAuthor().getFullName().isEmpty()) { %>
-                        <div style="font-size: 12px; color: #999;"><%= post.getAuthor().getFullName() %></div>
+                    <div style="font-size: 12px; color: #999;"><%= post.getAuthor().getFullName() %></div>
                     <% } %>
                     <div class="post-date"><%= post.getCreatedAt().format(formatter) %></div>
                 </div>
@@ -534,9 +525,9 @@
             <div style="display: flex; align-items: center; gap: 10px;">
                 <div class="post-category-badge"><%= post.getCategory() %></div>
                 <button onclick="copyPostLink()"
-                        style="background: none; border: none; font-size: 24px; cursor: pointer; padding: 5px;"
+                        style="background: none; border: none; font-size: 14px; cursor: pointer; padding: 5px; color: #333; text-decoration: underline;"
                         title="Copy link to post">
-                    🔗
+                    Copy Link
                 </button>
             </div>
 
@@ -571,10 +562,10 @@
         </div>
 
         <div class="post-stats">
-            <span>❤️ <%= post.getLikesCount() %> likes</span>
-            <span>💬 <%= post.getCommentsCount() %> comments</span>
-            <span>🎁 <%= post.getDonationsCount() %> donations</span>
-            <span>👁️ <%= post.getViewCount() %> views</span>
+            <span><%= post.getLikesCount() %> likes</span>
+            <span><%= post.getCommentsCount() %> comments</span>
+            <span><%= post.getDonationsCount() %> donations</span>
+            <span><%= post.getViewCount() %> views</span>
         </div>
 
         <div class="post-actions">
@@ -583,8 +574,8 @@
                   class="action-btn-form">
                 <input type="hidden" name="postId" value="<%= post.getId() %>">
                 <input type="hidden" name="action" value="<%= hasLiked ? "unlike" : "like" %>">
-                <button type="submit" class="action-btn <%= hasLiked ? "liked" : "" %>">
-                    <%= hasLiked ? "❤️" : "🤍" %> <%= hasLiked ? "Liked" : "Like" %>
+                <button type="submit" class="action-btn <%= hasLiked ? "liked" : "like" %>">
+                    <%= hasLiked ? "Liked" : "Like" %>
                 </button>
             </form>
 
@@ -593,18 +584,18 @@
                   class="action-btn-form">
                 <input type="hidden" name="postId" value="<%= post.getId() %>">
                 <input type="hidden" name="action" value="<%= hasSaved ? "unsave" : "save" %>">
-                <button type="submit" class="action-btn <%= hasSaved ? "saved" : "" %>">
-                    <%= hasSaved ? "🔖 Saved" : "📌 Save" %>
+                <button type="submit" class="action-btn <%= hasSaved ? "saved" : "save" %>">
+                    <%= hasSaved ? "Saved" : "Save" %>
                 </button>
             </form>
         </div>
         <div style="padding: 15px 20px; border-top: 1px solid #e0e0e0;">
             <button onclick="copyPostLink()" class="copy-link-btn">
-                🔗 Copy Link to Post
+                Copy Link to Post
             </button>
-            <span id="copySuccess" style="display: none; color: #4CAF50; margin-left: 10px; font-weight: 600;">
-        ✓ Link copied!
-    </span>
+            <span id="copySuccess" style="display: none; color: #4CAF50; margin-left: 10px; font-weight: bold;">
+                Link copied!
+            </span>
         </div>
 
         <%
@@ -612,15 +603,15 @@
         %>
         <div style="padding: 15px 20px; border-top: 1px solid #e0e0e0; display: flex; gap: 15px;">
             <a href="<%= request.getContextPath() %>/posts/edit?id=<%= post.getId() %>"
-               style="flex: 1; padding: 12px; text-align: center; background: #ff9800; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: all 0.3s;">
-                ✏️ Edit Post
+               style="flex: 1; padding: 12px; text-align: center; background: #ff9800; color: white; text-decoration: none; border-radius: 4px; font-weight: normal;">
+                Edit Post
             </a>
             <form method="POST" action="<%= request.getContextPath() %>/posts/delete"
                   onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');"
                   style="flex: 1; margin: 0;">
                 <input type="hidden" name="id" value="<%= post.getId() %>">
-                <button type="submit" style="width: 100%; padding: 12px; background: #f44336; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
-                    🗑️ Delete Post
+                <button type="submit" style="width: 100%; padding: 12px; background: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: normal;">
+                    Delete Post
                 </button>
             </form>
         </div>
@@ -631,7 +622,7 @@
 
     <!-- Donation Form -->
     <div class="donation-section">
-        <h2 class="section-title">🎁 Make a Donation</h2>
+        <h2 class="section-title">Make a Donation</h2>
         <form method="POST" action="<%= request.getContextPath() %>/posts/donate">
             <input type="hidden" name="postId" value="<%= post.getId() %>">
 
@@ -655,13 +646,13 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-donate">💚 Donate Now</button>
+            <button type="submit" class="btn-donate">Donate Now</button>
         </form>
     </div>
 
     <!-- Recent Donations -->
     <div class="donations-section">
-        <h2 class="section-title">💚 Recent Donations (<%= donations != null ? donations.size() : 0 %>)</h2>
+        <h2 class="section-title">Recent Donations (<%= donations != null ? donations.size() : 0 %>)</h2>
         <%
             if (donations != null && !donations.isEmpty()) {
                 for (Donation donation : donations) {
@@ -678,7 +669,7 @@
                     <% if (!donation.isAnonymous()) { %>
                     <a href="<%= request.getContextPath() %>/profile?username=<%= donation.getUser().getUsername() %>"
                        style="text-decoration: none; color: #333; transition: color 0.3s;"
-                       onmouseover="this.style.color='#667eea'"
+                       onmouseover="this.style.color='#555'"
                        onmouseout="this.style.color='#333'">
                         <%= donation.getUser().getUsername() %>
                     </a>
@@ -686,7 +677,7 @@
                     Anonymous
                     <% } %>
                     <span style="color: #999; font-size: 13px; font-weight: normal;">
-                    • <%= donation.getCreatedAt().format(shortFormatter) %>
+                    - <%= donation.getCreatedAt().format(shortFormatter) %>
                 </span>
                 </div>
                 <%
@@ -704,7 +695,7 @@
         } else {
         %>
         <div class="empty-message">
-            No donations yet. Be the first to support this cause! 💚
+            No donations yet. Be the first to support this cause!
         </div>
         <%
             }
@@ -713,7 +704,7 @@
 
     <!-- Comments Section -->
     <div class="comments-section">
-        <h2 class="section-title">💬 Comments (<%= comments != null ? comments.size() : 0 %>)</h2>
+        <h2 class="section-title">Comments (<%= comments != null ? comments.size() : 0 %>)</h2>
 
         <!-- Comment Form -->
         <div class="comment-form">
@@ -743,7 +734,7 @@
                     <div class="comment-author">
                         <a href="<%= request.getContextPath() %>/profile?username=<%= comment.getUser().getUsername() %>"
                            style="text-decoration: none; color: #333; transition: color 0.3s;"
-                           onmouseover="this.style.color='#667eea'"
+                           onmouseover="this.style.color='#555'"
                            onmouseout="this.style.color='#333'">
                             <%= comment.getUser().getUsername() %>
                         </a>
@@ -760,7 +751,7 @@
         } else {
         %>
         <div class="empty-message">
-            No comments yet. Be the first to comment! 💬
+            No comments yet. Be the first to comment!
         </div>
         <%
             }
@@ -790,11 +781,11 @@
         const btn = document.querySelector('.copy-link-btn');
 
         successMsg.style.display = 'inline';
-        btn.textContent = '✓ Copied!';
+        btn.textContent = 'Copied!';
 
         setTimeout(function() {
             successMsg.style.display = 'none';
-            btn.textContent = '🔗 Copy Link to Post';
+            btn.textContent = 'Copy Link to Post';
         }, 3000);
     }
 </script>

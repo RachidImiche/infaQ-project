@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - DonationsApp</title>
+    <title>Profile - infaQ</title>
     <style>
         * {
             margin: 0;
@@ -19,14 +19,14 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         .navbar {
             background: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 1px solid #ddd;
             padding: 15px 0;
             position: sticky;
             top: 0;
@@ -43,9 +43,6 @@
         }
 
         .navbar-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
             text-decoration: none;
             color: #333;
             font-size: 1.5em;
@@ -56,12 +53,12 @@
             text-decoration: none;
             color: #333;
             padding: 8px 16px;
-            border-radius: 8px;
+            border-radius: 4px;
             transition: background 0.3s;
         }
 
         .nav-link:hover {
-            background: #f0f2f5;
+            background: #f0f0f0;
         }
 
         .container {
@@ -72,10 +69,10 @@
 
         .profile-header {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 40px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .profile-info {
@@ -89,7 +86,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -98,8 +95,7 @@
             font-size: 48px;
             flex-shrink: 0;
             overflow: hidden;
-            border: 4px solid white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 3px solid #ddd;
         }
 
         .profile-avatar img {
@@ -114,7 +110,7 @@
 
         .profile-username {
             font-size: 2em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 8px;
         }
@@ -146,7 +142,7 @@
         .stat-value {
             font-size: 2em;
             font-weight: bold;
-            color: #667eea;
+            color: #333;
             margin-bottom: 5px;
         }
 
@@ -157,10 +153,10 @@
 
         .tabs {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .tab-buttons {
@@ -175,20 +171,20 @@
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 15px;
+            font-weight: bold;
             color: #666;
             transition: all 0.3s;
             margin-bottom: -2px;
         }
 
         .tab-button.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
+            color: #333;
+            border-bottom-color: #333;
         }
 
         .tab-button:hover {
-            color: #667eea;
+            color: #333;
         }
 
         .tab-content {
@@ -208,23 +204,23 @@
 
         .post-card {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
         }
 
         .post-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .post-thumbnail {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #666;
         }
 
         .post-card-content {
@@ -233,7 +229,7 @@
 
         .post-card-title {
             font-size: 1.2em;
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 10px;
             display: -webkit-box;
@@ -245,11 +241,12 @@
         .post-card-category {
             display: inline-block;
             padding: 4px 10px;
-            border-radius: 12px;
+            border-radius: 3px;
             font-size: 12px;
-            background: #e3f2fd;
-            color: #1976d2;
+            background: #f0f0f0;
+            color: #333;
             margin-bottom: 10px;
+            border: 1px solid #ddd;
         }
 
         .post-card-progress {
@@ -260,14 +257,14 @@
             width: 100%;
             height: 6px;
             background: #e0e0e0;
-            border-radius: 10px;
+            border-radius: 4px;
             overflow: hidden;
             margin-bottom: 8px;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
         }
 
         .progress-text {
@@ -276,7 +273,7 @@
         }
 
         .progress-amount {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
         }
 
@@ -296,9 +293,9 @@
 
         .donation-item {
             background: white;
-            border-radius: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
             gap: 20px;
@@ -308,7 +305,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            background: #4CAF50;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -322,7 +319,7 @@
         }
 
         .donation-post-title {
-            font-weight: 600;
+            font-weight: bold;
             color: #333;
             margin-bottom: 5px;
         }
@@ -334,7 +331,7 @@
 
         .donation-amount {
             font-size: 24px;
-            font-weight: 700;
+            font-weight: bold;
             color: #4CAF50;
         }
 
@@ -357,22 +354,20 @@
 
         .btn-edit-profile {
             padding: 10px 24px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #333;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
+            border-radius: 4px;
+            font-weight: normal;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
         .btn-edit-profile:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+            background: #555;
         }
     </style>
 </head>
@@ -402,9 +397,9 @@
 <nav class="navbar">
     <div class="navbar-content">
         <a href="<%= request.getContextPath() %>/feed" class="navbar-brand">
-            <span>🎁</span> DonationsApp
+            infaQ
         </a>
-        <a href="<%= request.getContextPath() %>/feed" class="nav-link">← Back to Feed</a>
+        <a href="<%= request.getContextPath() %>/feed" class="nav-link">Back to Feed</a>
     </div>
 </nav>
 
@@ -415,17 +410,17 @@
         <div class="profile-info">
             <div class="profile-avatar">
                 <% if (profileUser.getProfileImage() != null && !profileUser.getProfileImage().isEmpty()) { %>
-                    <img src="<%= request.getContextPath() %>/<%= profileUser.getProfileImage() %>"
-                         alt="<%= profileUser.getUsername() %>">
+                <img src="<%= request.getContextPath() %>/<%= profileUser.getProfileImage() %>"
+                     alt="<%= profileUser.getUsername() %>">
                 <% } else { %>
-                    <%= profileUser.getUsername().substring(0, 1).toUpperCase() %>
+                <%= profileUser.getUsername().substring(0, 1).toUpperCase() %>
                 <% } %>
             </div>
             <div class="profile-details">
                 <div class="profile-username">
                     @<%= profileUser.getUsername() %>
                     <% if (isOwnProfile) { %>
-                    <span style="font-size: 0.5em; color: #667eea; font-weight: normal; margin-left: 10px;">
+                    <span style="font-size: 0.5em; color: #666; font-weight: normal; margin-left: 10px;">
                     (You)
                 </span>
                     <% } %>
@@ -487,7 +482,7 @@
         %>
         <div class="profile-actions">
             <a href="<%= request.getContextPath() %>/profile/edit" class="btn-edit-profile">
-                ✏️ Edit Profile
+                Edit Profile
             </a>
         </div>
         <%
@@ -499,13 +494,13 @@
     <div class="tabs">
         <div class="tab-buttons">
             <button class="tab-button active" onclick="switchTab('posts')">
-                📝 Posts (<%= totalPosts %>)
+                Posts (<%= totalPosts %>)
             </button>
             <%
                 if (isOwnProfile) {
             %>
             <button class="tab-button" onclick="switchTab('donations')">
-                💚 My Donations (<%= userDonations != null ? userDonations.size() : 0 %>)
+                My Donations (<%= userDonations != null ? userDonations.size() : 0 %>)
             </button>
             <%
                 }
@@ -536,7 +531,7 @@
                     } else {
                     %>
                     <div class="post-thumbnail" style="display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;">
-                        🎁
+                        No Image
                     </div>
                     <%
                         }
@@ -556,10 +551,10 @@
                         </div>
 
                         <div class="post-card-stats">
-                            <span>❤️ <%= post.getLikesCount() %></span>
-                            <span>💬 <%= post.getCommentsCount() %></span>
-                            <span>🎁 <%= post.getDonationsCount() %></span>
-                            <span>👁️ <%= post.getViewCount() %></span>
+                            <span><%= post.getLikesCount() %> likes</span>
+                            <span><%= post.getCommentsCount() %> comments</span>
+                            <span><%= post.getDonationsCount() %> donations</span>
+                            <span><%= post.getViewCount() %> views</span>
                         </div>
                     </div>
                 </div>
@@ -572,14 +567,14 @@
             %>
 
             <div class="empty-state">
-                <div class="empty-icon">📭</div>
+                <div class="empty-icon">No posts</div>
                 <h3><%= isOwnProfile ? "You haven't created any posts yet" : profileUser.getUsername() + " hasn't created any posts yet" %></h3>
                 <%
                     if (isOwnProfile) {
                 %>
                 <p>Start making a difference by creating your first donation campaign!</p>
                 <a href="<%= request.getContextPath() %>/posts/create"
-                   style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                   style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: #333; color: white; text-decoration: none; border-radius: 4px; font-weight: normal;">
                     Create Your First Post
                 </a>
                 <%
@@ -604,7 +599,7 @@
                     for (Donation donation : userDonations) {
                 %>
                 <div class="donation-item">
-                    <div class="donation-icon">💚</div>
+                    <div class="donation-icon">$</div>
                     <div class="donation-details">
                         <div class="donation-post-title"><%= donation.getPost().getTitle() %></div>
                         <div class="donation-date"><%= donation.getCreatedAt().format(formatter) %></div>
@@ -628,7 +623,7 @@
             } else {
             %>
             <div class="empty-state">
-                <div class="empty-icon">💚</div>
+                <div class="empty-icon">No donations</div>
                 <h3>You haven't made any donations yet</h3>
                 <p>Support meaningful causes and make an impact today!</p>
             </div>
